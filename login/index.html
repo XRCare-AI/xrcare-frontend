@@ -1,0 +1,46 @@
+---
+layout: auth
+title_setting: login.title
+scripts:
+  - /js/login.js
+---
+<!-- Log in for admins and users (POST /api/authenticate). The first log in goes on to the survey (/welcome/). -->
+<div class="auth-form-wrap" data-when="guest">
+  <h1 class="auth__heading" data-site-text="login.heading"></h1>
+  <p class="auth__subheading" data-site-text="auth.login_subheading"></p>
+
+  <form class="auth-form" id="login-form" novalidate>
+    <div class="auth-field">
+      <label for="login-uid" data-site-text="login.username_label"></label>
+      <div class="auth-field__control">
+        <i class="fa-regular fa-user" aria-hidden="true"></i>
+        <input id="login-uid" name="uid" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      </div>
+    </div>
+    <div class="auth-field">
+      <label for="login-password" data-site-text="login.password_label"></label>
+      <div class="auth-field__control">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required>
+        <button class="auth-field__reveal" type="button" data-password-toggle aria-pressed="false"><i class="fa-regular fa-eye" aria-hidden="true"></i><span class="sr-only" data-site-text="auth.show_password"></span></button>
+      </div>
+    </div>
+    <button type="submit" class="pill-button pill-button--block"><span data-site-text="login.submit_label"></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    <p class="auth-form__message" role="status" aria-live="polite"></p>
+  </form>
+
+  <p class="auth__switch">
+    <span data-site-text="auth.no_account"></span>
+    <a href="{{ '/signup/' | relative_url }}" data-site-text="auth.sign_up_link"></a>
+  </p>
+</div>
+
+<!-- Already logged in -->
+<div class="auth-account" data-when="user" hidden>
+  <span class="auth-account__avatar" data-account="initials" aria-hidden="true"></span>
+  <p class="auth-account__label" data-site-text="login.logged_in_as"></p>
+  <h1 class="auth__heading" data-account="name"></h1>
+  <p class="auth-account__role"></p>
+  <a class="pill-button pill-button--block" href="{{ '/' | relative_url }}" data-continue><span data-site-text="auth.continue_label"></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+  <button type="button" class="auth-account__logout" data-action="log-out" data-site-text="login.log_out_label"></button>
+</div>

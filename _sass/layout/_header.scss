@@ -1,0 +1,303 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Top menu bar: logo, menu links, Log in / Get Started (or the account menu). Over dark page tops it starts
+// transparent and turns to frosted glass once scrolled; on white pages it is a solid dark bar.
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  height: $header-height;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+
+  @include below($bp-header) { height: $header-height-mobile; }
+
+  &--transparent {
+    background: linear-gradient(to bottom, rgba($ink, 0.55), rgba($ink, 0));
+  }
+
+  &--transparent.is-scrolled,
+  .menu-open &--transparent {
+    background: rgba($ink, 0.72);
+    backdrop-filter: blur(18px) saturate(160%);
+    -webkit-backdrop-filter: blur(18px) saturate(160%);
+    box-shadow: 0 1px 0 $line;
+  }
+
+  // White pages: a solid bar that takes up its own space
+  &--bar,
+  &--tall,
+  &--solid {
+    position: sticky;
+    background: $ink;
+    box-shadow: 0 1px 0 $line;
+  }
+
+  &__inner {
+    height: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+
+    @include below($bp-header) { padding: 0 20px; }
+  }
+
+  &__logo {
+    flex: none;
+    display: block;
+    line-height: 0;
+
+    img {
+      height: 52px;
+      width: auto;
+
+      @include below($bp-header) { height: 44px; }
+    }
+  }
+
+  // Menu links in the middle; an underline grows under the hovered/current link
+  &__links {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    @include below($bp-header) { display: none; }
+
+    ul {
+      list-style: none;
+      display: flex;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+    }
+
+    a {
+      position: relative;
+      display: block;
+      padding: 8px 14px;
+      color: rgba($white, 0.78);
+      font-size: 14.5px;
+      line-height: 20px;
+      font-weight: 500;
+      white-space: nowrap;
+      border-radius: 999px;
+      transition: color 0.2s ease, background-color 0.2s ease;
+
+      &:hover {
+        color: $white;
+        background: rgba($white, 0.07);
+      }
+    }
+
+    .current-menu-item > a {
+      color: $white;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 14px;
+        right: 14px;
+        bottom: 2px;
+        height: 2px;
+        border-radius: 2px;
+        background: $gradient;
+      }
+    }
+
+    @include between($bp-header + 1, 1180px) {
+      a { padding: 8px 9px; font-size: 13.5px; }
+    }
+  }
+
+  &__actions {
+    flex: none;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-left: auto;
+  }
+}
+
+.header-auth {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+
+  &[hidden] { display: none; }
+
+  &__login {
+    color: $white;
+    font-size: 14.5px;
+    font-weight: 500;
+
+    &:hover { color: $accent; }
+  }
+
+  @include below($bp-header) { display: none; }
+}
+
+// Logged in: one rounded box. Closed it is just the chip (avatar + name); on hover / keyboard focus the same box
+// grows downward to show My Hub and Log out. It floats over the page, so the header does not change height.
+.account-menu {
+  position: relative;
+  height: 42px;               // fixed: the box grows down past it without moving the header
+
+  @include below($bp-header) { display: none; }
+
+  &__box {
+    position: relative;
+    z-index: 1;
+    border: 1px solid $line;
+    border-radius: 21px;
+    background: rgba($white, 0.04);
+    overflow: hidden;
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  &:hover &__box,
+  &:focus-within &__box {
+    background: rgba(#0d1531, 0.97);
+    border-color: rgba($accent, 0.4);
+    box-shadow: 0 18px 50px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(16px);
+  }
+
+  &__items {
+    display: grid;
+    grid-template-rows: 0fr;          // collapsed; animates open to its natural height
+    transition: grid-template-rows 0.25s $ease-quint;
+
+    > * { min-height: 0; overflow: hidden; }
+  }
+
+  &:hover &__items,
+  &:focus-within &__items {
+    grid-template-rows: 1fr;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 11px 18px;
+    border: 0;
+    border-top: 1px solid $line;
+    background: none;
+    color: rgba($white, 0.85);
+    font-family: $font-body;
+    font-size: 14px;
+    text-align: left;
+    white-space: nowrap;
+    cursor: pointer;
+
+    i { width: 16px; color: $accent; }
+
+    &:hover,
+    &:focus-visible {
+      color: $white;
+      background: rgba($white, 0.06);
+      outline: none;
+    }
+  }
+}
+
+// The chip itself (first row of the box)
+.account-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  height: 40px;
+  padding: 0 16px 0 4px;
+  color: $white;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+
+  &:hover,
+  &:focus-visible { color: $white; outline: none; }
+
+  &__avatar {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: $gradient;
+    color: $ink;
+    font-size: 12.5px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  &__name { flex: 1; }
+
+  &__caret {
+    font-size: 10px;
+    opacity: 0.6;
+    transition: transform 0.25s ease;
+
+    .account-menu:hover &,
+    .account-menu:focus-within & { transform: rotate(180deg); }
+  }
+}
+
+// Menu button: phones and tablets only
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border: 0;
+  background: none;
+  color: $white;
+  cursor: pointer;
+  font-family: $font-body;
+
+  @include below($bp-header) { display: flex; }
+
+  &__label {
+    font-size: 15px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+
+  &__lines {
+    position: relative;
+    display: block;
+    width: 22px;
+    height: 14px;
+
+    i,
+    &::before,
+    &::after {
+      position: absolute;
+      left: 0;
+      width: 22px;
+      height: 2px;
+      border-radius: 2px;
+      background-color: $white;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    i { top: 6px; }
+
+    &::before,
+    &::after { content: ""; }
+
+    &::before { top: 0; }
+    &::after { bottom: 0; }
+  }
+
+  .menu-open & .menu-toggle__lines {
+    i { opacity: 0; }
+    &::before { transform: translateY(6px) rotate(45deg); }
+    &::after { transform: translateY(-6px) rotate(-45deg); }
+  }
+}

@@ -1,0 +1,52 @@
+// Design tokens copied from xrcare.ai (Salient theme settings and the site's custom CSS)
+
+// Colors
+$accent: #17ddfc;            // Salient accent color: headings, buttons, hotspots, slide-out menu
+$hero-heading: #00ccff;      // Home page h1
+$navy: #27395d;              // Eyebrow headings, menu text, active dot, submit text
+$navy-deep: #0e1e3b;         // Dark section backgrounds
+$header-bg: #080e20;         // Header color when not transparent
+$page-bg: #232323;           // Behind the full-screen rows
+$loading-bg: #1e2025;
+$yellow: #fffb00;            // Extra color 1: links on hover, inactive dots
+$footer-heading: #54c8e8;
+$tooltip-bg: #2551a1;        // Hotspot tooltips
+$white: #ffffff;
+$black: #000000;
+$error: #d63637;             // WPForms error/required color
+
+// Fonts
+$font-body: "Montserrat", sans-serif;
+$font-label: "Fira Sans", sans-serif;
+$font-tooltip: arial, helvetica, sans-serif;
+
+// Header
+$header-padding: 50px;
+$header-side-padding: 30px;  // full-width header
+$logo-height: 125px;
+$logo-height-mobile: 75px;
+$side-padding: 90px;         // Salient "extended responsive" padding
+$container-max: 1425px;
+
+// Breakpoints (Salient)
+$bp-desktop-small: 1300px;
+$bp-header: 999px;           // Mobile header and tablet layout below this
+$bp-tablet: 991px;           // Visual Composer vc_hidden-sm / footer stacking
+$bp-phone: 690px;
+$bp-small-phone: 767px;
+
+// Motion
+$ease-quint: cubic-bezier(0.23, 1, 0.32, 1);   // easeOutQuint (data-cae)
+$ease-menu: cubic-bezier(0.25, 1, 0.2, 1);
+
+// Redesign (2026): top menu bar, home page, log in / sign up / survey
+$font-display: "Space Grotesk", "Montserrat", sans-serif;
+$ink: #050a18;               // Page background behind the new home page and auth screens
+$ink-raised: #0c1430;        // Cards on $ink
+$violet: #7b61ff;            // Second gradient stop with $accent
+$line: rgba(255, 255, 255, 0.1);
+$muted: rgba(255, 255, 255, 0.66);
+$gradient: linear-gradient(120deg, $accent 0%, #4fa3ff 45%, $violet 100%);
+$header-height: 76px;
+$header-height-mobile: 64px;
+$radius: 18px;

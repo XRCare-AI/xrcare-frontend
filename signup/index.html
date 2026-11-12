@@ -1,0 +1,65 @@
+---
+layout: auth
+title_setting: signup.title
+auth_panel: true
+scripts:
+  - /js/signup.js
+---
+<!-- Sign up (POST /api/user): creates the account, logs it in and goes on to the survey (/welcome/) -->
+<div class="auth-form-wrap">
+  <h1 class="auth__heading" data-site-text="signup.heading"></h1>
+  <p class="auth__subheading" data-site-text="signup.subheading"></p>
+
+  <form class="auth-form" id="signup-form" novalidate>
+    <div class="auth-field">
+      <label for="signup-name" data-site-text="signup.name_label"></label>
+      <div class="auth-field__control">
+        <i class="fa-regular fa-id-badge" aria-hidden="true"></i>
+        <input id="signup-name" name="name" type="text" autocomplete="name" required>
+      </div>
+    </div>
+    <div class="auth-field">
+      <label for="signup-uid" data-site-text="signup.username_label"></label>
+      <div class="auth-field__control">
+        <i class="fa-regular fa-user" aria-hidden="true"></i>
+        <input id="signup-uid" name="uid" type="text" autocomplete="username" autocapitalize="none" spellcheck="false"
+               pattern="[A-Za-z0-9._\-]{3,40}" aria-describedby="signup-uid-hint" required>
+      </div>
+      <p class="auth-field__hint" id="signup-uid-hint" data-site-text="signup.username_hint"></p>
+    </div>
+    <div class="auth-field">
+      <label for="signup-email" data-site-text="signup.email_label"></label>
+      <div class="auth-field__control">
+        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+        <input id="signup-email" name="email" type="email" autocomplete="email" autocapitalize="none" spellcheck="false" required>
+      </div>
+    </div>
+    <div class="auth-field">
+      <label for="signup-password" data-site-text="signup.password_label"></label>
+      <div class="auth-field__control">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        <input id="signup-password" name="password" type="password" autocomplete="new-password" minlength="6" aria-describedby="signup-strength" required>
+        <button class="auth-field__reveal" type="button" data-password-toggle aria-pressed="false"><i class="fa-regular fa-eye" aria-hidden="true"></i><span class="sr-only" data-site-text="auth.show_password"></span></button>
+      </div>
+      <div class="strength" id="signup-strength" data-level="0">
+        <span class="strength__bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span class="strength__label" data-site-text="signup.password_hint"></span>
+      </div>
+    </div>
+    <div class="auth-field">
+      <label for="signup-confirm" data-site-text="signup.confirm_label"></label>
+      <div class="auth-field__control">
+        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+        <input id="signup-confirm" name="confirm" type="password" autocomplete="new-password" required>
+        <i class="fa-solid fa-circle-check auth-field__match" aria-hidden="true"></i>
+      </div>
+    </div>
+    <button type="submit" class="pill-button pill-button--block"><span data-site-text="signup.submit_label"></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+    <p class="auth-form__message" role="status" aria-live="polite"></p>
+  </form>
+
+  <p class="auth__switch">
+    <span data-site-text="signup.have_account"></span>
+    <a href="{{ '/login/' | relative_url }}" data-site-text="signup.log_in_link"></a>
+  </p>
+</div>

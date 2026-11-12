@@ -1,0 +1,433 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// My Hub (/account/): the logged-in user's home
+
+.hub {
+  position: relative;
+  overflow: hidden;
+  padding: $header-height + 70px 0 120px;
+
+  @include below($bp-header) { padding-top: $header-height-mobile + 50px; }
+
+  > .container { position: relative; }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 44px;
+
+    @include below($bp-phone) { flex-wrap: wrap; }
+  }
+
+  &__avatar {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 84px;
+    height: 84px;
+    border-radius: 26px;
+    background: $gradient;
+    color: $ink;
+    font-family: $font-display;
+    font-size: 30px;
+    font-weight: 700;
+    box-shadow: 0 0 50px rgba($accent, 0.3);
+  }
+
+  &__greeting {
+    margin: 0 0 6px;
+    font-family: $font-display;
+    font-size: clamp(30px, 4.4vw, 56px);
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: $white;
+  }
+
+  &__since {
+    margin: 0;
+    color: $muted;
+    font-size: 15px;
+  }
+
+  &__logout {
+    margin-left: auto;
+
+    @include below($bp-phone) { margin-left: 0; }
+  }
+
+  // Recommendation and "Update my answers"
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 16px 20px;
+    margin-bottom: 40px;
+
+    &:empty { display: none; }
+  }
+
+  &__answers-button { padding: 12px 22px; }
+
+  // Account details on the left, links into the site on the right
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr);
+    gap: 32px;
+    align-items: start;
+
+    @include below($bp-header) { grid-template-columns: 1fr; }
+  }
+}
+
+.hub-card__title {
+  margin: 0 0 20px;
+  font-family: $font-display;
+  font-size: 22px;
+  font-weight: 600;
+  color: $white;
+}
+
+// Compact recommendation: a small label over a gradient button
+.hub-recommend {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &__kicker {
+    color: $muted;
+    font-size: 13.5px;
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 22px;
+    border-radius: 999px;
+    background: $gradient;
+    color: $ink;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+    box-shadow: 0 8px 30px rgba($accent, 0.2);
+    transition: translate 0.3s $ease-quint;
+
+    &:hover {
+      color: $ink;
+      translate: 0 -2px;
+
+      .fa-arrow-right { transform: translateX(3px); }
+    }
+
+    i { font-size: 14px; transition: transform 0.25s ease; }
+  }
+}
+
+// The two boxes: Account and Jump back in
+.hub-box {
+  padding: 24px;
+  border: 1px solid $line;
+  border-radius: 24px;
+  background: linear-gradient(170deg, rgba($white, 0.05), rgba($white, 0.015));
+
+  @include below($bp-phone) { padding: 18px; }
+}
+
+// Section headings (Account, Jump back in) with an optional button on the right
+.hub__section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 36px;
+  margin-bottom: 16px;
+
+  .hub-card__title { margin: 0; }
+}
+
+.hub__edit,
+.hub__cancel {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 1px solid $line;
+  border-radius: 999px;
+  background: none;
+  color: rgba($white, 0.8);
+  font-family: $font-body;
+  font-size: 13.5px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  i { color: $accent; font-size: 12px; }
+
+  &:hover { color: $white; border-color: rgba($accent, 0.5); }
+}
+
+// Account: rows in the same style as the "Jump back in" links
+.hub-rows {
+  display: grid;
+  gap: 10px;
+
+  > [data-hub-fields] {
+    display: grid;
+    gap: 10px;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+  }
+
+  &__message {
+    margin: 0;
+    color: $accent;
+    font-size: 14px;
+
+    &:empty { display: none; }
+    &.is-error { color: #ff9b9b; }
+  }
+}
+
+.hub-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 66px;
+  padding: 12px 18px;
+  border: 1px solid $line;
+  border-radius: 16px;
+  background: $ink-raised;
+  color: $white;
+  transition: border-color 0.2s ease;
+
+  &.is-editable:focus-within { border-color: rgba($accent, 0.6); }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba($accent, 0.1);
+    color: $accent;
+    font-size: 15px;
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__label {
+    color: $muted;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  &__value {
+    font-weight: 600;
+    font-size: 15.5px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  &__input {
+    width: 100%;
+    margin-top: 2px;
+    padding: 6px 10px;
+    border: 1px solid rgba($white, 0.14);
+    border-radius: 9px;
+    background: rgba($white, 0.05);
+    color: $white;
+    font-family: $font-body;
+    font-size: 15px;
+    font-weight: 600;
+    outline: none;
+
+    &:focus { border-color: $accent; box-shadow: 0 0 0 3px rgba($accent, 0.15); }
+  }
+
+  &__hint {
+    color: rgba($white, 0.45);
+    font-size: 12.5px;
+  }
+}
+
+// "Jump back in": compact stacked links
+.hub-links {
+  display: grid;
+  gap: 10px;
+}
+
+.hub-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 18px 14px 14px;
+  border: 1px solid $line;
+  border-radius: 16px;
+  background: $ink-raised;
+  color: $white;
+  transition: translate 0.3s $ease-quint, border-color 0.3s ease;
+
+  &:hover {
+    color: $white;
+    translate: 4px 0;
+    border-color: rgba($accent, 0.45);
+
+    .hub-link__arrow { transform: translateX(3px); color: $accent; }
+  }
+
+  &.is-mine {
+    border-color: rgba($accent, 0.5);
+    background: linear-gradient(160deg, rgba($accent, 0.12), rgba($violet, 0.12)), $ink-raised;
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    background: rgba($accent, 0.1);
+    color: $accent;
+    font-size: 15px;
+  }
+
+  &__text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  &__label {
+    font-weight: 600;
+    font-size: 15.5px;
+    line-height: 1.4;
+  }
+
+  // "For you": plain gradient text after the label
+  &__badge {
+    margin-left: 10px;
+    font-size: 12.5px;
+    font-weight: 700;
+    background: $gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__desc {
+    color: $muted;
+    font-size: 13.5px;
+    line-height: 1.4;
+  }
+
+  &__arrow {
+    color: rgba($white, 0.5);
+    font-size: 13px;
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+}
+
+// Pop-up with the survey answers
+.hub-dialog {
+  width: min(560px, calc(100vw - 32px));
+  max-height: calc(100vh - 64px);
+  padding: 28px;
+  border: 1px solid $line;
+  border-radius: 24px;
+  background: $ink-raised;
+  color: $white;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.6);
+
+  &[open] { animation: dialog-in 0.3s $ease-quint; }
+
+  &::backdrop {
+    background: rgba($ink, 0.7);
+    backdrop-filter: blur(4px);
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+
+    h2 {
+      margin: 0;
+      font-family: $font-display;
+      font-size: 24px;
+      font-weight: 600;
+      color: $white;
+    }
+  }
+
+  &__close {
+    width: 38px;
+    height: 38px;
+    border: 1px solid $line;
+    border-radius: 50%;
+    background: none;
+    color: $white;
+    cursor: pointer;
+
+    &:hover { background: rgba($white, 0.08); }
+  }
+
+  &__body { margin-bottom: 24px; }
+}
+
+@keyframes dialog-in {
+  from { opacity: 0; transform: translateY(16px) scale(0.98); }
+}
+
+.hub-answers {
+  margin: 0;
+
+  &__row {
+    padding: 14px 0;
+    border-top: 1px solid $line;
+
+    &:first-child { border-top: 0; padding-top: 0; }
+  }
+
+  dt {
+    margin-bottom: 8px;
+    color: $muted;
+    font-size: 13.5px;
+  }
+
+  dd {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+  }
+}
+
+.hub-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  background: rgba($white, 0.06);
+  color: $white;
+  font-size: 14px;
+  line-height: 1.4;
+
+  i { color: $accent; font-size: 12px; }
+}

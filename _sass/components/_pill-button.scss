@@ -1,0 +1,70 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Rounded gradient button (header Get Started, home calls to action, log in / sign up / survey)
+.pill-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: $gradient;
+  background-size: 160% 100%;
+  background-position: 0 0;
+  color: $ink;
+  font-family: $font-body;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba($accent, 0.25);
+  transition: background-position 0.5s ease, transform 0.2s ease, box-shadow 0.3s ease, opacity 0.2s ease;
+
+  &:hover {
+    color: $ink;
+    background-position: 100% 0;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 40px rgba($violet, 0.35);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $white;
+    outline-offset: 3px;
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  i { transition: transform 0.2s ease; }
+  &:hover i.fa-arrow-right { transform: translateX(3px); }
+
+  &--small {
+    padding: 9px 18px;
+    font-size: 14px;
+    box-shadow: none;
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  // Outline version on dark backgrounds
+  &--ghost {
+    background: rgba($white, 0.04);
+    color: $white;
+    box-shadow: inset 0 0 0 1px rgba($white, 0.22);
+
+    &:hover {
+      color: $white;
+      background: rgba($white, 0.1);
+      box-shadow: inset 0 0 0 1px rgba($white, 0.4);
+    }
+  }
+}

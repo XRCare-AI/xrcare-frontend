@@ -1,0 +1,48 @@
+<!-- Top menu bar on every page: logo, the menu links, and Log in / Get Started (or the account menu once logged in).
+     Below the tablet breakpoint the links move into the slide-out menu behind the Menu button.
+     Links come from the API's nav list and labels from its settings (js/main.js, js/account.js). -->
+<!-- variant: transparent (over a dark page top; turns to glass once scrolled) | bar | tall | solid (solid dark bar) -->
+<header id="header" class="site-header site-header--{{ include.variant | default: 'transparent' }}" role="banner">
+  <div class="site-header__inner">
+    <a id="logo" class="site-header__logo" href="{{ '/' | relative_url }}">
+      <img data-site-src="logo" alt="XRCare AI home" width="1983" height="1080">
+    </a>
+
+    <nav class="site-header__links" aria-label="Main Menu">
+      <ul data-nav-list></ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <!-- Logged out -->
+      <div class="header-auth" data-when="guest">
+        <a class="header-auth__login" href="{{ '/login/' | relative_url }}" data-site-text="account.log_in"></a>
+        <a class="pill-button pill-button--small" href="{{ '/signup/' | relative_url }}" data-site-text="account.sign_up"></a>
+      </div>
+      <!-- Logged in: the chip opens the user's hub. Hovering (or tabbing into) it grows the same box downward
+           to show My Hub and Log out. -->
+      <div class="account-menu" data-when="user" hidden>
+        <div class="account-menu__box">
+          <a class="account-chip" href="{{ '/account/' | relative_url }}">
+            <span class="account-chip__avatar" data-account="initials" aria-hidden="true"></span>
+            <span class="account-chip__name" data-account="first_name"></span>
+            <i class="fa-solid fa-chevron-down account-chip__caret" aria-hidden="true"></i>
+            <span class="sr-only" data-site-text="account.my_hub"></span>
+          </a>
+          <div class="account-menu__items"><div>
+            <a class="account-menu__item" href="{{ '/account/' | relative_url }}">
+              <i class="fa-solid fa-house-user" aria-hidden="true"></i><span data-site-text="account.my_hub"></span>
+            </a>
+            <button type="button" class="account-menu__item" data-action="log-out">
+              <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span data-site-text="account.log_out"></span>
+            </button>
+          </div></div>
+        </div>
+      </div>
+
+      <button class="menu-toggle" type="button" aria-controls="slide-out-menu" aria-expanded="false">
+        <span class="menu-toggle__label" data-site-text="menu_label"></span>
+        <span class="menu-toggle__lines" aria-hidden="true"><i></i></span>
+      </button>
+    </div>
+  </div>
+</header>

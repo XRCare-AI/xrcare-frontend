@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting…</title>
+  <meta name="robots" content="noindex">
+  {%- assign target = page.redirect_to | relative_url %}
+  <link rel="canonical" href="{{ target }}">
+  <meta http-equiv="refresh" content="0; url={{ target }}">
+  <!-- Old address: go to its new home, keeping any ?query (e.g. /articles/?category=x) -->
+  <script>location.replace({{ target | split: "#" | first | jsonify }} + location.search + {{ page.redirect_hash | default: "" | jsonify }});</script>
+</head>
+<body><p>This page moved to <a href="{{ target }}">{{ target }}</a>.</p></body>
+</html>

@@ -1,0 +1,42 @@
+{%- comment -%} Settings come from the page's front matter, else from its layout's (auth.html) {%- endcomment -%}
+{%- assign body_class = page.body_class | default: layout.body_class -%}
+{%- assign header_variant = page.header | default: layout.header | default: "transparent" -%}
+{%- assign footer_variant = page.footer | default: layout.footer -%}
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta name="baseurl" content="{{ site.baseurl }}">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="icon" type="image/png" href="{{ '/images/logo.png' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Same fonts as xrcare.ai (Salient theme typography) -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,400&family=Fira+Sans:wght@500&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Icons (xrcare.ai loads Font Awesome 6.5.0 from the same CDN) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+</head>
+<!-- Page settings (front matter): body_class (is-flow = dark page), header (transparent | solid), title_setting
+     (setting holding the tab title), footer: contact (adds the contact form) | none -->
+<body class="is-loading {{ body_class }}"{% if page.title_setting %} data-title-setting="{{ page.title_setting }}"{% endif %}>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  {% include header.html variant=header_variant %}
+  {% include slide-out-menu.html %}
+
+  <main id="main">
+    {{ content }}
+  </main>
+
+  {% unless footer_variant == "none" %}{% include footer.html variant=footer_variant %}{% endunless %}
+  <p class="load-error" hidden></p>
+
+  <script type="module" src="{{ '/js/main.js' | relative_url }}"></script>
+  <script type="module" src="{{ '/js/contact.js' | relative_url }}"></script>
+  {% for script in layout.scripts %}<script type="module" src="{{ script | relative_url }}"></script>
+  {% endfor %}{% for script in page.scripts %}<script type="module" src="{{ script | relative_url }}"></script>
+  {% endfor %}
+</body>
+</html>

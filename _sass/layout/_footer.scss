@@ -1,0 +1,130 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Footer on every page: logo, menu, contact line, copyright
+.site-footer {
+  padding: 48px 0 28px;
+  background: $ink;
+  border-top: 1px solid $line;
+  color: $white;
+
+  &__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid $line;
+  }
+
+  &__logo img {
+    height: 44px;
+    width: auto;
+  }
+
+  &__menu ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 26px;
+    margin: 0;
+    padding: 0;
+  }
+
+  &__menu a,
+  &__contact a {
+    color: rgba($white, 0.7);
+    font-size: 15px;
+
+    &:hover { color: $accent; }
+  }
+
+  &__contact {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 22px;
+  }
+
+  &__copyright {
+    margin: 22px 0 0;
+    color: rgba($white, 0.4);
+    font-size: 12.5px;
+    line-height: 1.6;
+  }
+}
+
+// Contact page: "Ready to Transform Your Care Team?", contact details and the form
+.contact-panel {
+  padding: 20px 0 120px;
+  background: $ink;
+
+  &__heading {
+    margin: 0 0 40px;
+    font-family: $font-display;
+    font-size: clamp(28px, 3.4vw, 46px);
+    line-height: 1.15;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    background: $gradient;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr);
+    gap: 24px;
+    align-items: start;
+
+    @include below($bp-header) { grid-template-columns: 1fr; }
+  }
+
+  &__details {
+    display: grid;
+    gap: 14px;
+  }
+
+  .contact-form {
+    padding: 32px;
+    border: 1px solid $line;
+    border-radius: 24px;
+    background: linear-gradient(170deg, rgba($white, 0.05), rgba($white, 0.015));
+
+    @include below($bp-phone) { padding: 22px; }
+  }
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  border: 1px solid $line;
+  border-radius: 18px;
+  background: $ink-raised;
+  color: $white;
+  font-size: 16px;
+  transition: border-color 0.25s ease, translate 0.3s $ease-quint;
+
+  &:hover {
+    color: $white;
+    border-color: rgba($accent, 0.5);
+    translate: 4px 0;
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 44px;
+    height: 44px;
+    border-radius: 13px;
+    background: rgba($accent, 0.12);
+    color: $accent;
+  }
+
+  &__value { overflow-wrap: anywhere; }
+}

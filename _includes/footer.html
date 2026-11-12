@@ -1,0 +1,48 @@
+<!-- Footer on every page: logo, menu, contact details and copyright. Only the Contact page (variant "contact")
+     adds "Ready to Transform Your Care Team?" with the contact details and form. Words come from the API (js/main.js, js/contact.js). -->
+{%- if include.variant == 'contact' %}
+<section class="contact-panel" aria-labelledby="contact-info">
+  <div class="container">
+    <h2 id="contact-info" class="contact-panel__heading" data-site-text="contact_heading"></h2>
+    <div class="contact-panel__grid">
+      <div class="contact-panel__details">
+        <a class="contact-detail" data-site-href="phone_href">
+          <span class="contact-detail__icon"><i class="fa-solid fa-phone" aria-hidden="true"></i></span>
+          <span class="contact-detail__value" data-site-text="phone"></span>
+        </a>
+        <a class="contact-detail" data-site-mailto="email">
+          <span class="contact-detail__icon"><i class="fa-solid fa-envelope" aria-hidden="true"></i></span>
+          <span class="contact-detail__value" data-site-text="email"></span>
+        </a>
+        <a class="contact-detail" data-site-href="footer_linkedin_url" target="_blank" rel="noopener">
+          <span class="contact-detail__icon"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></span>
+          <span class="contact-detail__value">LinkedIn</span>
+        </a>
+      </div>
+      <form id="contact-form" class="contact-form" novalidate>
+        <div class="contact-form__fields" data-contact-fields></div>
+        <div class="contact-form__submit">
+          <button type="submit" class="pill-button" data-site-text="contact_submit_label"></button>
+          <p class="contact-form__message" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{%- endif %}
+<footer id="footer" class="site-footer" role="contentinfo">
+  <div class="container site-footer__inner">
+    <a class="site-footer__logo" href="{{ '/' | relative_url }}"><img data-site-src="logo" alt="XRCare AI home" width="1983" height="1080"></a>
+    <nav class="site-footer__menu" aria-label="Footer Menu">
+      <ul data-nav-list></ul>
+    </nav>
+    <div class="site-footer__contact">
+      <a data-site-href="phone_href" data-site-text="phone"></a>
+      <a data-site-mailto="email" data-site-text="email"></a>
+      <a data-site-href="footer_linkedin_url" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+    </div>
+  </div>
+  <div class="container">
+    <p class="site-footer__copyright" data-site-text="copyright"></p>
+  </div>
+</footer>

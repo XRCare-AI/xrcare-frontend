@@ -1,0 +1,97 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Contact form on the Contact page (dark fields to match the site)
+$field-gap: 4%;
+
+.contact-form {
+  text-align: left;
+
+  &__row {
+    display: flex;
+    gap: $field-gap;
+
+    @include below($bp-phone) { display: block; }
+  }
+
+  .field {
+    padding: 10px 0;
+    width: 100%;
+
+    &--third { width: calc((100% - 2 * #{$field-gap}) / 3); }
+    &--two-thirds { width: calc((100% - 2 * #{$field-gap}) / 3 * 2 + #{$field-gap}); }
+    &--medium input { width: 60%; }
+
+    @include below($bp-phone) {
+      &,
+      &--third,
+      &--two-thirds {
+        width: 100%;
+        padding: 0;
+        margin: 10px 0;
+      }
+
+      &--medium input { width: 100%; }
+    }
+  }
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+    color: rgba($white, 0.85);
+    font-family: $font-body;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: 600;
+
+    .required { color: $accent; font-weight: 400; }
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 0 16px;
+    font-family: $font-body;
+    font-size: 16px;
+    color: $white;
+    background: rgba($white, 0.04);
+    border: 1px solid rgba($white, 0.12);
+    border-radius: 14px;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+    &:hover { border-color: rgba($white, 0.22); }
+
+    &:focus {
+      border-color: $accent;
+      background: rgba($accent, 0.05);
+      box-shadow: 0 0 0 4px rgba($accent, 0.15);
+    }
+  }
+
+  textarea {
+    height: 120px;
+    padding: 14px 16px;
+    resize: vertical;
+  }
+
+  &__submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    margin-top: 18px;
+  }
+
+  &__message {
+    margin: 0;
+    font-size: 15px;
+    line-height: 1.5;
+    color: $white;
+
+    &:empty { display: none; }
+    &.is-error { color: #ff9b9b; }
+  }
+}

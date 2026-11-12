@@ -1,0 +1,23 @@
+---
+# Front matter tells Jekyll to compile this file (and the _sass partials it uses) to assets/css/main.css
+---
+// Site stylesheet: every page loads only this file. Partials live in _sass/.
+
+// Base
+@use "base/base";
+
+// Layout
+@use "layout/header";
+@use "layout/slide-out";
+@use "layout/footer";
+
+// Components
+@use "components/pill-button";
+@use "components/contact-form";
+
+// Pages
+@use "pages/home";       // home page sections, plus what every dark "flow" page shares
+@use "pages/flow";       // Explore, About Us, Contact, an article, 404
+@use "pages/hub";        // My Hub (/account/)
+@use "pages/auth";       // Log in / Sign up
+@use "pages/survey";     // first-login survey

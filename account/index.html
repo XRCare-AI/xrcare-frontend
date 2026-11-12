@@ -1,0 +1,62 @@
+---
+body_class: is-flow is-hub
+header: transparent
+title_setting: hub.title
+scripts:
+  - /js/hub.js
+---
+<!-- My Hub: the logged-in user's home. A recommendation (from the survey) with "Update my answers" beside it, which
+     opens the answers in a pop-up; account details on the left and links into the site on the right.
+     Labels come from the "hub" setting, answers from GET /api/id (js/hub.js). -->
+<div class="hub" data-hub>
+  <div class="pagehead__glow" aria-hidden="true"></div>
+  <div class="container">
+    <header class="hub__head">
+      <span class="hub__avatar" data-account="initials" aria-hidden="true"></span>
+      <div>
+        <h1 class="hub__greeting" data-hub-greeting></h1>
+        <p class="hub__since" data-hub-since></p>
+      </div>
+      <button type="button" class="pill-button pill-button--ghost pill-button--small hub__logout" data-action="log-out">
+        <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span data-site-text="account.log_out"></span>
+      </button>
+    </header>
+
+    <div class="hub__actions" data-hub-actions></div>
+
+    <div class="hub__grid">
+      <!-- Account details, editable in place (PUT /api/user) -->
+      <section class="hub-box" aria-labelledby="hub-account-heading">
+        <div class="hub__section-head">
+          <h2 id="hub-account-heading" class="hub-card__title" data-site-text="hub.account_heading">Account</h2>
+          <button type="button" class="hub__edit" data-hub-edit><i class="fa-solid fa-pen" aria-hidden="true"></i><span data-site-text="hub.edit">Edit</span></button>
+        </div>
+        <form class="hub-rows" data-hub-account novalidate>
+          <div data-hub-fields></div>
+          <div class="hub-rows__actions" hidden>
+            <button type="submit" class="pill-button pill-button--small" data-site-text="hub.save">Save changes</button>
+            <button type="button" class="hub__cancel" data-hub-cancel data-site-text="hub.cancel">Cancel</button>
+          </div>
+          <p class="hub-rows__message" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+
+      <section class="hub-box" aria-labelledby="hub-explore-heading">
+        <div class="hub__section-head">
+          <h2 id="hub-explore-heading" class="hub-card__title" data-site-text="hub.explore_heading">Jump back in</h2>
+        </div>
+        <div class="hub-links" data-hub-tiles></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Survey answers, opened by "Update my answers" -->
+  <dialog class="hub-dialog" data-hub-dialog aria-labelledby="hub-dialog-heading">
+    <div class="hub-dialog__head">
+      <h2 id="hub-dialog-heading" data-site-text="hub.answers_heading"></h2>
+      <button type="button" class="hub-dialog__close" data-hub-close><i class="fa-solid fa-xmark" aria-hidden="true"></i><span class="sr-only" data-site-text="hub.close"></span></button>
+    </div>
+    <div class="hub-dialog__body" data-hub-answers></div>
+    <a class="pill-button" href="{{ '/welcome/' | relative_url }}"><span data-site-text="hub.retake_survey"></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+  </dialog>
+</div>

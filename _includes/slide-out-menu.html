@@ -1,0 +1,23 @@
+<!-- Phone/tablet menu that slides out from the right when the Menu button is tapped.
+     Links come from the API's nav list (js/main.js); the account links from js/account.js. -->
+<div class="slide-out-bg" hidden></div>
+<div id="slide-out-menu" class="slide-out" role="dialog" aria-modal="true" aria-label="Menu">
+  <button class="slide-out__close" type="button"><span class="sr-only">Close Menu</span></button>
+  <nav class="slide-out__menu" role="navigation">
+    <ul data-nav-list></ul>
+  </nav>
+  <div class="slide-out__account">
+    <div data-when="guest">
+      <a class="pill-button" href="{{ '/signup/' | relative_url }}" data-site-text="account.sign_up"></a>
+      <a class="slide-out__login" href="{{ '/login/' | relative_url }}" data-site-text="account.log_in"></a>
+    </div>
+    <div data-when="user" hidden>
+      <p class="slide-out__who"><strong data-account="name"></strong></p>
+      <a class="pill-button" href="{{ '/account/' | relative_url }}" data-site-text="account.my_hub"></a>
+      <button class="slide-out__login" type="button" data-action="log-out" data-site-text="account.log_out"></button>
+    </div>
+  </div>
+  <ul class="slide-out__social">
+    <li><a data-site-href="linkedin_url" target="_blank" rel="noopener"><span class="sr-only">linkedin</span><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a></li>
+  </ul>
+</div>

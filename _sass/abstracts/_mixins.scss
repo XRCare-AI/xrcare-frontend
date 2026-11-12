@@ -1,0 +1,39 @@
+@use "tokens" as *;
+
+// Media queries by Salient breakpoint name
+@mixin below($width) {
+  @media only screen and (max-width: $width) {
+    @content;
+  }
+}
+
+@mixin between($min, $max) {
+  @media only screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin above($width) {
+  @media only screen and (min-width: $width + 1) {
+    @content;
+  }
+}
+
+// Visually hidden but read by screen readers
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+// Fill the parent
+@mixin cover {
+  position: absolute;
+  inset: 0;
+}

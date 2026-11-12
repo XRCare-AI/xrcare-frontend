@@ -1,0 +1,28 @@
+---
+layout: default
+body_class: is-auth
+header: transparent
+footer: none
+scripts:
+  - /js/auth.js
+---
+{%- comment -%} auth_panel: true (Sign up) adds the brand panel on the left; Log in is the form card alone {%- endcomment -%}
+<!-- Log in and Sign up. Every word comes from the API settings "auth", "login" and "signup" (js/main.js fills [data-site-*]). -->
+<div class="auth{% unless page.auth_panel %} auth--single{% endunless %}">
+  {%- if page.auth_panel %}
+  <aside class="auth__panel">
+    <canvas class="auth__network" aria-hidden="true"></canvas>
+    <div class="auth__glow" aria-hidden="true"></div>
+    <div class="auth__panel-inner">
+      <h2 class="auth__panel-heading" data-site-text="auth.panel_heading"></h2>
+      <p class="auth__panel-text" data-site-text="auth.panel_text"></p>
+      <ul class="auth__points" data-auth-points></ul>
+    </div>
+  </aside>
+  {%- endif %}
+  <section class="auth__main">
+    <div class="auth__card">
+      {{ content }}
+    </div>
+  </section>
+</div>

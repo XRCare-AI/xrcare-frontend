@@ -1,0 +1,29 @@
+# Site settings (content itself comes from the xrcare-backend API: GET /api/site)
+title: XRCare AI
+description: XR-AI Care Co-Pilot. Delivering the power of XR + AI to healthcare.
+
+# Set to the repo path when served from a project page (e.g. "/xrcare-frontend"); "" for a custom domain
+baseurl: ""
+
+# Every page uses _layouts/default.html (shared header, footer and scripts) unless it sets its own layout
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+# All styling is Sass: assets/css/main.scss pulls in the partials in _sass/
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Files Jekyll should not copy into the site (same approach as Open Coding Society pages)
+exclude:
+# Jekyll defaults
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+# Custom excludes
+  - Makefile
+  - README.md
+  - tools

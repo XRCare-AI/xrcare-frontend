@@ -1,0 +1,21 @@
+---
+layout: default
+body_class: is-survey
+header: transparent
+footer: none
+title_setting: survey.title
+scripts:
+  - /js/survey.js
+---
+<!-- First-login survey: one question per screen, questions and wording from the "survey" API setting.
+     Answers are saved with PUT /api/user/survey; the last screen points to the page that fits best. -->
+<div class="survey">
+  <div class="survey__backdrop" aria-hidden="true">
+    <div class="survey__glow survey__glow--a"></div>
+    <div class="survey__glow survey__glow--b"></div>
+  </div>
+  <div class="survey__progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+    <span class="survey__progress-bar"></span>
+  </div>
+  <div class="survey__stage" data-survey-stage></div>
+</div>
