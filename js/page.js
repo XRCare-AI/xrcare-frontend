@@ -6,13 +6,14 @@ import { currentUser, swapGuestLinks } from './account.js';
 const assetURL = siteURL;  // images are files in this repo (images/)
 
 // Pages made of sections (Home, About Us, Explore, Contact): <div data-page="about-us"> names the page.
-// Each section from GET /api/pages/<slug> is drawn by its `layout` (LAYOUTS below) and fades in when scrolled to.
+// Each section from _data/pages/<page>.yml (built into the page) is drawn by its `layout` (LAYOUTS below) and fades
+// in when scrolled to. Only the Explore articles need the backend.
 document.addEventListener("DOMContentLoaded", async () => {
     const holder = document.querySelector("[data-page]");
     if (!holder) return;
     const flow = holder.querySelector("[data-page-sections]");
     try {
-        const [page, { settings }] = await Promise.all([getPage(holder.dataset.page), getSite()]);
+        const [page, { settings }] = await Promise.all([getPage(), getSite()]);
         setTitle(page.title, settings.site_title);
         page.sections.forEach(section => {
             const draw = LAYOUTS[section.layout];

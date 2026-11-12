@@ -1,0 +1,10 @@
+# The menu (top bar, slide-out menu and footer)
+
+- label: Home
+  url: /
+- label: About Us
+  url: /about-us/
+- label: Explore
+  url: /explore/
+- label: Contact
+  url: /contact/

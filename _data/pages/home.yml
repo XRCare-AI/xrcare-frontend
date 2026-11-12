@@ -1,0 +1,139 @@
+# The Home page: its sections in order. js/page.js draws each one by its layout
+# (see the list of layouts in the README).
+
+title: Home
+sections:
+- slug: intro
+  name: XR AI Care Co-Pilot
+  layout: spotlight
+  theme: light
+  content:
+    title: XR-AI Care Co-Pilot™
+    slogan: Delivering the Power of XR + AI to Healthcare
+    highlight: XR + AI
+    links:
+    - label: Get Started
+      url: /signup/
+      icon: fa-solid fa-rocket
+    - label: About Us
+      url: /about-us/
+      icon: fa-solid fa-people-group
+    - label: Explore XRCare
+      url: /explore/
+      icon: fa-solid fa-compass
+    - label: Contact
+      url: /contact/
+      icon: fa-solid fa-envelope
+    badge:
+      image: /images/evonexus.png
+      alt: EvoNexus Portfolio Company
+    video:
+      src: /videos/hero-reel.mp4
+      poster: /videos/hero-reel.jpg
+- slug: co-pilot
+  name: The Co-Pilot
+  layout: copilot
+  theme: dark
+  content:
+    text: >-
+      The XR-AI Co-Pilot <strong>revolutionizing the future of healthcare</strong> for clinical teams, pharmacies
+      and care team training. The XR platform that delivers AI aimed at <strong>improving patient care</strong>
+      experiences.
+    core_label: Care Co-Pilot
+    inputs:
+    - icon: fa-solid fa-eye
+      label: Vision
+    - icon: fa-solid fa-microphone-lines
+      label: Speech
+    - icon: fa-solid fa-heart-pulse
+      label: Sensors
+    - icon: fa-solid fa-file-medical
+      label: EMR
+- slug: features
+  name: Agentic AI Features
+  layout: capabilities
+  theme: dark
+  content:
+    heading: Empower Your Care Teams with a Trusted Co-Pilot
+    items:
+    - icon: fa-solid fa-eye
+      title: Context-Aware Intelligence
+      text: Understands every care moment through real-time visual, audio, and workflow cues.
+    - icon: fa-solid fa-wand-magic-sparkles
+      title: Proactive Co-Pilot
+      text: Anticipates clinician needs, surfacing next-best actions before errors occur.
+    - icon: fa-solid fa-layer-group
+      title: Multimodal Insight
+      text: Combines vision, speech, sensor, and EMR data for complete context.
+    - icon: fa-solid fa-diagram-project
+      title: Adaptive Orchestration
+      text: Unites AI agents to streamline documentation, decisions, and safety.
+    - icon: fa-solid fa-arrows-rotate
+      title: Continuous Learning
+      text: Improves performance and workflows with every interaction.
+    - icon: fa-solid fa-shield-halved
+      title: Privacy-First Design
+      text: Built on consent, minimal data use, and secure, compliant operations.
+- slug: Avoid-Burnout
+  name: Modern Solutions
+  layout: pillars
+  theme: light
+  content:
+    heading_accent: 'Avoid Burnout:'
+    heading: Modern Solutions for Real-World Challenges
+    items:
+    - icon: fa-solid fa-gauge-high
+      title: Improve Efficiency
+      text: >-
+        Smarter workflows and real-time AI support mean tasks take less time. From medication dispensing to bedside
+        care, your team can work faster without sacrificing quality.
+    - icon: fa-solid fa-vr-cardboard
+      title: Enhance Work Capabilities
+      text: >-
+        XR immerses clinicians in lifelike scenarios while AI provides personalized coaching. Together, they expand
+        professional skills, confidence and adaptability for critical situations.
+    - icon: fa-solid fa-brain
+      title: Reduce Errors, Lighten Cognitive Load
+      text: >-
+        AI catches risks before they become mistakes, and XR practice can reduce stress under pressure. The result:
+        fewer errors, sharper focus and better decision-making.
+- slug: Critical-areas-of-impact
+  name: Critical Areas of Impact
+  layout: audiences
+  theme: dark
+  content:
+    heading: Critical Areas of Impact
+    link_label: Explore
+    items:
+    - icon: fa-solid fa-user-doctor
+      title: Clinical Teams
+      url: /explore/#clinical-teams
+      text: >-
+        Immersive XR patient simulations with AI coaching can accelerate onboarding and sharpen critical thinking
+        in emergency and bedside care. Personalized AI tracking builds confidence, boosts retention and adapts learning
+        to the needs of each clinician.
+    - icon: fa-solid fa-prescription-bottle-medical
+      title: Pharmacy
+      url: /explore/#pharmacy
+      text: >-
+        AI-driven XR simulations help pharmacists reduce medication errors and allows individuals and teams to optimize
+        workflows.
+    - icon: fa-solid fa-people-group
+      title: Care Team Training
+      url: /explore/#care-team-training
+      text: >-
+        Team-based XR scenarios mirror real patient challenges, breaking down silos and improving collaboration.
+        AI feedback enhances communication and coordination while scalable training supports hospitals, clinics
+        and networks.
+- slug: get-started
+  name: Get Started
+  layout: cta
+  theme: light
+  content:
+    heading: See what a co-pilot can do for your team
+    primary:
+      label: Create an Account
+      url: /signup/
+    secondary:
+      label: Log In
+      url: /login/

@@ -1,0 +1,12 @@
+# The Contact page: its sections in order. js/page.js draws each one by its layout
+# (see the list of layouts in the README).
+
+title: Contact
+sections:
+- slug: top
+  name: Contact
+  layout: pagehead
+  theme: dark
+  content:
+    title: Contact Us
+    text: Call, email or send us a message below and the XRCare team will get back to you.

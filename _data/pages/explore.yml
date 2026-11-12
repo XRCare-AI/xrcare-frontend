@@ -1,0 +1,108 @@
+# The Explore page: its sections in order. js/page.js draws each one by its layout
+# (see the list of layouts in the README).
+
+title: Explore
+sections:
+- slug: top
+  name: Explore
+  layout: pagehead
+  theme: dark
+  content:
+    title: Explore XRCare
+    highlight: XRCare
+    text: >-
+      Everything in one place: how the XR-AI Co-Pilot supports clinical teams, care team training and pharmacy,
+      plus our latest articles.
+- slug: jump
+  name: ''
+  layout: subnav
+  theme: dark
+  content:
+    links:
+    - label: Clinical Teams
+      url: '#clinical-teams'
+      icon: fa-solid fa-user-doctor
+    - label: Care Team Training
+      url: '#care-team-training'
+      icon: fa-solid fa-people-group
+    - label: Pharmacy
+      url: '#pharmacy'
+      icon: fa-solid fa-prescription-bottle-medical
+    - label: Articles
+      url: '#articles'
+      icon: fa-solid fa-newspaper
+- slug: clinical-teams
+  name: Clinical Teams
+  layout: audience
+  theme: dark
+  content:
+    title: For Clinical Teams
+    heading: Delivering the Power of XR + AI to Clinical Teams
+    text: >-
+      The frontline solution is here: XR Care for Clinical Teams delivers less admin load, more patient time, better
+      training and Point-of-care guidance, leading to safer, higher-quality patient outcomes.
+    image: /images/clinical-teams.jpg
+    features:
+    - icon: fa-solid fa-graduation-cap
+      title: Accelerate Training & Onboarding
+      text: Interactive XR simulations speed up readiness in ED, med-surg, LTC, and home health.
+    - icon: fa-solid fa-heart-pulse
+      title: Zero-Risk Skill Practice
+      text: Practice procedures safely before applying them to real patients.
+    - icon: fa-solid fa-file-medical
+      title: Reduce Administrative Burden
+      text: AI-assisted charting, coding, and reporting free nurses for patient care.
+    cta:
+      label: Talk to Our Team
+      url: /contact/
+- slug: care-team-training
+  name: Care Team Training
+  layout: audience
+  theme: dark
+  content:
+    title: For Care Team Training
+    heading: Delivering the Power of XR + AI to Care Team Training
+    text: >-
+      Where AI Meets Learning: Building confidence through collaborative team scenarios, advancing skills with consistent,
+      AI-driven modules, and supporting growth with personalized analytics—all designed to empower care teams to
+      support peak-level performance.
+    image: /images/care-team-training.jpg
+    reverse: true
+    features:
+    - icon: fa-solid fa-people-arrows
+      title: Collaborative Learning
+      text: XR team scenarios improve coordination and reduce errors in handoffs.
+    - icon: fa-solid fa-scale-balanced
+      title: Consistent Standards
+      text: AI modules ensure training consistency across sites and staff levels.
+    - icon: fa-solid fa-chart-line
+      title: Continuous Improvement
+      text: Analytics reveal gaps and guide personalized skill development.
+    cta:
+      label: Talk to Our Team
+      url: /contact/
+- slug: pharmacy
+  name: Pharmacy
+  layout: audience
+  theme: dark
+  content:
+    title: For Pharmacy
+    heading: Delivering the Power of XR + AI to Pharmacy
+    text: >-
+      AI-driven XR simulations help pharmacists reduce medication errors and allows individuals and teams to optimize
+      workflows.
+    image: /images/pharmacy.jpg
+    cta:
+      label: Talk to Our Team
+      url: /contact/
+- slug: articles
+  name: Articles
+  layout: articles
+  theme: dark
+  content:
+    heading: Articles
+    text: Insights from the XRCare team on XR, AI and the future of care.
+    search_placeholder: Search articles
+    all_label: All
+    read_more: Read article
+    no_results: No articles match your search.

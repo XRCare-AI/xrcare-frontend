@@ -1,18 +1,21 @@
-import { apiRequest } from './api/config.js';
+// Site content is built into each page from the frontend's _data/ folder (see _layouts/default.html), so it
+// needs no backend: <script id="site-data"> holds {settings, nav}; <script id="page-data"> the page's sections.
+const readData = id => JSON.parse(document.getElementById(id)?.textContent || "null");
 
-// Settings and menu for every page, loaded once per page: {settings, nav}
-let siteRequest;
+// Settings and menu for every page: {settings, nav}
+let siteData;
 export function getSite() {
-    siteRequest ??= apiRequest('/api/site');
-    return siteRequest;
+    siteData ??= readData("site-data") || { settings: {}, nav: [] };
+    return Promise.resolve(siteData);
 }
 
-// One page's sections: {slug, title, sections}
-export function getPage(slug) {
-    return apiRequest(`/api/pages/${encodeURIComponent(slug)}`);
+// This page's sections: {title, sections}
+export function getPage() {
+    const page = readData("page-data");
+    return page ? Promise.resolve(page) : Promise.reject(new Error("This page has no content."));
 }
 
-// Site paths from the API ("/about-us/", "/images/logo.png") with the Jekyll baseurl in front;
+// Site paths ("/about-us/", "/images/logo.png") with the Jekyll baseurl in front;
 // full URLs, mailto:/tel: links and #anchors are unchanged
 const baseurl = document.querySelector('meta[name="baseurl"]')?.content || "";
 export function siteURL(url) {

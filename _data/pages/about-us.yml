@@ -1,0 +1,214 @@
+# The About Us page: its sections in order. js/page.js draws each one by its layout
+# (see the list of layouts in the README).
+
+title: About Us
+sections:
+- slug: built-for-experts
+  name: Built by Industry Experts
+  layout: about
+  theme: dark
+  content:
+    heading: Built for Experts by Experts
+    highlight: Experts
+    text: >-
+      One of the industry’s top executive teams in engineering and innovation have converged to deliver the best
+      XR-AI platform for the future of healthcare.
+    columns:
+    - title: Vision
+      icon: fa-solid fa-binoculars
+      text: >-
+        Deliver XR-AI solution as an end-to-end XR-AI solution serving as a Point-of-Care  Co-pilot™ streamlining
+        documentation, accelerating workflows and boosting accuracy for clinical teams, pharmacies and care team
+        training.
+    - title: Mission
+      icon: fa-solid fa-flag
+      text: >-
+        To build the most sought-after trusted intelligent XR-AI platform that redefines human‐environment interactions
+        – starting in healthcare and scaling the ecosystem to support sectors including: education, industrial,
+        public safety and more.
+    quote:
+      image: /images/team/amin-barhoush.png
+      text: >-
+        “XR-AI Point-of-Care Co-Pilot is becoming the new standard for every clinician, pharmacist and care team
+        trainer, empowering them to work smarter, reduce errors and unlock capabilities we could only imagine a
+        few years ago.”
+      author: Amin Barhoush
+      role: Founder of XR Care
+- slug: team
+  name: Our Team
+  layout: team
+  theme: dark
+  content:
+    read_bio: Read bio
+    hide_bio: Hide bio
+    groups:
+    - heading: Executive Team
+      members:
+      - image: /images/team/amin-barhoush.png
+        name: AMIN BARHOUSH
+        title: CEO
+        bio:
+        - >-
+          <b>Amin Barhoush</b> is the Chief Executive Officer of Plerion AI, Inc., where he leads the development
+          of the XRCare platform with a steadfast vision to revolutionize healthcare through the immersive XR-AI
+          Co-pilot. An engineer at heart and a program manager by discipline, Amin brings more than 25 years of
+          experience spanning product and systems engineering.
+        - >-
+          Prior to founding XRCare.ai, Amin held senior leadership roles across diverse industries. Most notably,
+          he directed software development for Qualcomm’s application processors. Earlier, he contributed to a nationwide
+          healthcare digital transformation initiative in Qatar for the FIFA 2022 World Cup.
+        - >-
+          Amin combines deep technical fluency with sharp business acumen—positioning XRCare.ai at the forefront
+          of the XR-AI healthcare transformation. He holds an M.B.A. from the University of Scranton, an M.S. in
+          wireless communication from National University, and a B.E.T. in electronics from the University of Toledo.
+      - image: /images/team/quyen-ly.png
+        name: QUYEN LY, MBA, R.Ph.
+        title: CO-FOUNDER &amp; CPO
+        bio:
+        - >-
+          <b>Quyen Ly, MBA, R.Ph.</b>, is a strategic advisor and leader specializing in Digital Health, AI-driven
+          analytics, and clinical informatics platforms. With a unique blend of Oncology Pharmacy expertise and
+          business acumen, she helps early-stage companies bridge transformative technology with market viability.
+        - >-
+          Her operational leadership across major healthcare systems evolved from clinical practice into high-impact
+          IT leadership, where she implemented large-scale IoT initiatives, including Infusion InterOp and Medical
+          Device Integration with Cerner EMR systems. At Becton Dickinson, she guided AI-driven analytics platforms
+          and defined enterprise data strategy. As Global Head of Service at Philips HealthCare, her strategic direction
+          led the business to achieve positive EBITA for the first time, demonstrating strong capabilities in P&amp;L
+          management and global cloud migration.
+        - >-
+          Beyond her executive roles, Quyen mentors future professionals as a Preceptor at UCSD Skaggs School of
+          Pharmacy and holds leadership roles with the Asian Pacific Healthcare Foundation and Van Lang Center San
+          Diego.
+      - image: /images/team/haider-ali.png
+        name: DR HAIDER ALI
+        title: CTO, Agentic-AI
+        bio:
+        - >-
+          <b>Haider Ali, Ph.D.,</b> has more than 15 years of experience in computer vision and artificial intelligence
+          across Asia, Europe, and the U.S. Dr. Ali is the founder and CEO of Crowdception Inc. He previously served
+          as an assistant research professor of computer science at Johns Hopkins University and as a senior research
+          scientist at the German Aerospace Center (DLR).
+        - >-
+          Dr. Ali earned his Ph.D. in computer science from Vienna University of Technology, Austria, in 2010, and
+          has since driven innovation in AI, automation, and health systems.
+      - image: /images/team/yasser-alsaied.png
+        name: YASSER ALSAIED
+        title: Executive Advisor
+        bio:
+        - >-
+          <strong>Yasser Alsaied</strong> is the Executive Advisor to the XRCare management team, guiding strategic
+          direction and technology innovation. With over 30 years of leadership in AI, IoT, and cloud computing—including
+          as Global VP of IoT at Amazon Web Services (AWS) and as a senior executive at Qualcomm—Yasser brings deep
+          expertise in scaling intelligent platforms and connecting advanced systems from edge to cloud. At XRcare,
+          he helps shape the vision of redefining clinical precision through AI-driven extended reality, integrating
+          real-time intelligence into clinical workflows to enhance provider confidence, procedural accuracy, and
+          patient outcomes.
+    - heading: Clinical Advisors
+      members:
+      - image: /images/team/preetham-suresh.png
+        name: DR PREETHAM SURESH, MD
+        title: Clinical Advisor
+        bio:
+        - >-
+          <b>Dr. Preetham Suresh, MD, </b>is a Clinical Advisor and practicing anesthesiologist with over 20 years
+          of experience at the intersection of medicine and technology. With a clinical focus on ultrasound-guided
+          peripheral nerve blocks, he brings a rare combination of engineering rigor and medical expertise, grounded
+          in a BS in Chemical Engineering from Northwestern University and a Doctor of Medicine from Case Western
+          Reserve University.
+        - >-
+          At UC San Diego Health, Dr. Suresh serves as Clinical Professor of Anesthesiology and Vice Chair of Innovation
+          and Entrepreneurship, championing the integration of emerging technology into clinical practice. As Associate
+          Dean for Medical Education in Simulation and Medical Director of UCSD’s Simulation Training Center, he
+          designs forward-thinking educational programs that cultivate innovation across healthcare. He also serves
+          as a Staff Anesthesiologist at the VA San Diego Healthcare System and as a Board Examiner for the American
+          Board of Anesthesiology.
+        - >-
+          His background in chemical engineering has fueled collaboration on medical device and pharmaceutical development
+          projects, making him a uniquely effective bridge between clinical insight and technological innovation.
+      - image: /images/team/michael-becker.png
+        name: DR MICHAEL BECKER
+        title: Nursing Advisor
+        bio:
+        - >-
+          <b>Michael Becker, Ph.D., R.N.,</b> is a nationally recognized healthcare executive and nursing leader
+          with more than two decades of experience driving innovation at the intersection of clinical practice and
+          technology. He served as chief nursing officer at Penn Presbyterian Medical Center, leading quality and
+          safety advancements, and as vice president of nursing and chief nursing executive at Masimo, where he
+          shaped global clinical strategy and AI-enabled monitoring solutions.
+        - >-
+          As executive strategic advisor, Dr. Becker helps guide the company’s vision, ensuring innovation translates
+          into measurable clinical and operational value.
+      - image: /images/team/pamela-wiltfang.png
+        name: DR. PAMELA WILTFANG
+        title: Pharmacy Advisor
+        bio:
+        - >-
+          <strong>Pamela Wiltfang, Pharm.D., M.P.H.</strong>, is an adjunct assistant professor at the University
+          of Iowa College of Pharmacy and Kirkwood Community College, where she developed curricula in pharmacology,
+          pharmaceutical calculations and compounding, pharmacy operations and regulations, and pharmacy law.
+        - >-
+          Her career includes roles as Rare Disease Medical Science Liaison at Amgen, Associate Director of Oncology
+          and Immunology Medical Science Liaison at Immunocore, and Director of Clinical Services and Innovative
+          Practice at NuCara Health Solutions. She also served as pharmacist-in-charge for more than 10 pharmacies,
+          managing over 50 employees directly and more than 500 indirectly across 30 sites in the Midwest.
+        - >-
+          Pamela’s experience spans Iowa, Illinois, Minnesota, Kansas, Missouri, Wisconsin, Nebraska, North Dakota,
+          South Dakota, and Texas, and includes collaboration with PBMs and payers such as Wellmark, TriStar, and
+          ACOs.
+    - heading: Technical Advisors
+      members:
+      - image: /images/team/irfan-khan.png
+        name: DR IRFAN KHAN
+        title: System Architect/ ML Advisor
+        bio:
+        - >-
+          <b>Irfan Khan, Ph.D., </b>has been a technology executive with deep expertise in system solutions, ASICs,
+          cellular infrastructure, communication networks and AI. Over his 30-year past career at Qualcomm, Ericsson,
+          and SRI International, he has driven groundbreaking innovations and led the commercialization of several
+          flagship products. He has successfully built and scaled high-performance global R&amp;D teams from the
+          ground up. For the past several years, Dr. Khan has delved into AI/ML topics. Leveraging his strong math
+          background and hardware/software knowledge, he has developed a deep understanding of AI models, their
+          applicability for various use cases, key performance metrics and performance enhancing techniques. He
+          has taught machine learning at university level. Dr. Khan is a co-inventor on several issued patents.
+        - >-
+          Dr. Khan is active in San Diego’s startup ecosystem, serving as an angel investor and advisor. He is a
+          member of NuFund Venture Group. Passionate about giving back, he is a mentor for the Alaska gBETA accelerator
+          and is an adjunct faculty member at San Diego State University (SDSU) and UC San Diego (UCSD), where he
+          teaches machine learning and data science courses. He also serves as Chair of the Computer Science Industry
+          Advisory Board (IAB) at SDSU.
+        - >-
+          Dr. Khan holds a Ph.D. in Electrical Engineering from the University of Southern California (USC), and
+          MS degrees in Electrical Engineering (George Washington University) and Computer Science (USC). He also
+          earned an MBA in Entrepreneurship from SDSU and a B.E. in Electrical &amp; Electronics Engineering from
+          BITS Pilani, India.
+      - image: /images/team/ammar-darkazanli.png
+        name: AMMAR DARKAZANLI
+        title: Regulatory Advisor
+        bio:
+        - >-
+          <b>Ammar Darkazanli, Ph.D., M.B.A.,</b> is a transformational technology leader with more than 20 years
+          of experience architecting scalable healthcare platforms and driving AI/VR innovation in clinical care.
+          He currently leads platform architecture for an immersive XR-AI co-pilot revolutionizing healthcare delivery.
+        - >-
+          Previously, he served as CEO/CTO of Ocu Health Care and held executive roles at Biofourmis, Shifamed,
+          Cala Health, and Glooko. Ammar’s expertise spans AI/ML platform development, healthcare regulatory compliance
+          (including FDA, HIPAA, SOC 2, ISO 13485, and IEC 62304), cloud-native architectures, EMR integration,
+          and global team leadership.
+        - >-
+          He holds an M.B.A. from the NYU Stern School of Business and a Ph.D. in electrical and computer engineering
+          from the University of Arizona.
+      - image: /images/team/khaled-el-maleh.png
+        name: DR KHALED EL-MALEH
+        title: Innovation Advisor
+        bio:
+        - >-
+          <b>Khaled El-Maleh, Ph.D.,</b> worked as a senior director of technology in the IP department at Qualcomm,
+          leading the AI/ML IP Portfolio Team in key innovation areas including 5G/6G, distributed learning, AI
+          acceleration, generative modeling, and multimedia. He was the engineering lead for the multimedia, software,
+          position location, and sensors IP teams. In his role, he led IP acquisition, litigation, and strategy
+          development.
+        - >-
+          Dr. El-Maleh received bachelor’s degrees in electrical engineering and applied mathematics from KFUPM
+          in Saudi Arabia, and M.S., Eng., and Ph.D. degrees in electrical and computer engineering from McGill
+          University, Canada. He is an accomplished inventor with more than 400 U.S. and international patents.

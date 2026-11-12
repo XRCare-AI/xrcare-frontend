@@ -2,7 +2,7 @@
 title: XRCare AI
 description: XR-AI Care Co-Pilot. Delivering the power of XR + AI to healthcare.
 
-# Set to the repo path when served from a project page (e.g. "/xrcare-frontend"); "" for a custom domain
+# "" locally; the GitHub Pages build passes the real path (/xrcare-frontend) with --baseurl (see .github/workflows)
 baseurl: ""
 
 # Every page uses _layouts/default.html (shared header, footer and scripts) unless it sets its own layout

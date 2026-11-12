@@ -5,14 +5,15 @@ import { currentUser, showAccount } from './account.js';
 // My Hub (/account/): greeting, the page we recommend from the survey, the survey answers, links into the site
 // (the ones that fit the user's answers first) and account details. Logged-out visitors go to Log in.
 document.addEventListener("DOMContentLoaded", async () => {
-    const [user, site] = await Promise.all([currentUser(), getSite().catch(() => ({ settings: {} }))]);
+    const [user, site] = await Promise.all([currentUser(), getSite()]);
     if (!user) {
         location.replace(siteURL("/login/") + "?next=" + encodeURIComponent(location.pathname));
         return;
     }
     const s = site.settings;
     const hub = s.hub || {};
-    const survey = s.survey || { questions: [] };
+    // The survey's questions (for labelling the user's answers) come from the backend that stores them
+    const survey = { questions: await apiRequest("/api/survey").catch(() => []) };
     const answers = user.survey || {};
     const fill = (text, values) => (text || "").replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
     const icon = cls => el("i", { class: cls, "aria-hidden": "true" });

@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 </head>
-<!-- Page settings (front matter): body_class (is-flow = dark page), header (transparent | solid), title_setting
+<!-- Page settings (front matter): data_page (its sections from _data/pages/<name>.yml), body_class (is-flow = dark page), header (transparent | solid), title_setting
      (setting holding the tab title), footer: contact (adds the contact form) | none -->
 <body class="is-loading {{ body_class }}"{% if page.title_setting %} data-title-setting="{{ page.title_setting }}"{% endif %}>
   <a class="skip-link" href="#main">Skip to main content</a>
@@ -33,6 +33,12 @@
   {% unless footer_variant == "none" %}{% include footer.html variant=footer_variant %}{% endunless %}
   <p class="load-error" hidden></p>
 
+  <!-- Site content, built into every page from _data/ so the site works without the backend
+       ("</" is escaped so text can never close the script tag) -->
+  <script type="application/json" id="site-data">{"settings": {{ site.data.site | jsonify | replace: "</", "<\/" }}, "nav": {{ site.data.nav | jsonify | replace: "</", "<\/" }}}</script>
+  {%- if page.data_page %}
+  <script type="application/json" id="page-data">{{ site.data.pages[page.data_page] | jsonify | replace: "</", "<\/" }}</script>
+  {%- endif %}
   <script type="module" src="{{ '/js/main.js' | relative_url }}"></script>
   <script type="module" src="{{ '/js/contact.js' | relative_url }}"></script>
   {% for script in layout.scripts %}<script type="module" src="{{ script | relative_url }}"></script>

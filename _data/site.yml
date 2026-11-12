@@ -1,0 +1,168 @@
+# Site-wide wording and links: header, footer, log in / sign up, survey screens, My Hub, 404.
+# Pages read these through data-site-text="key.subkey" (js/main.js) and the page scripts.
+# (The survey's questions live in the backend, which stores the answers: GET /api/survey.)
+
+site_title: XRCare AI
+logo: /images/logo.png
+linkedin_url: https://www.linkedin.com/company/xrcare/about/
+menu_label: Menu
+contact_heading: Ready to Transform Your Care Team?
+phone: +1-858-324-4114
+phone_href: tel:+18583244114
+email: info@XRCare.ai
+footer_linkedin_url: https://www.linkedin.com/company/xrcare
+footer_background: /images/darkhexes.jpg
+header_background: /images/darkhexes.jpg
+copyright: © 2026 Plerion AI, Inc. All rights reserved. XRCare™ is a DBA of Plerion AI, Inc.
+contact_submit_label: Submit
+contact_sending_label: Sending...
+not_found:
+  title: Page not found
+  code: '404'
+  heading: Page Not Found
+  button:
+    label: Back Home
+    url: /
+blog:
+  title: Articles
+  by: By
+  read_more: Read More
+  search_placeholder: Search...
+  recent_posts: Recent Posts
+  archives: Archives
+  categories: Categories
+  meta: Meta
+  log_in: Log in
+  popular_posts: Popular Posts
+  previous_post: Previous Post
+  next_post: Next Post
+  share: Share
+  home: Home
+  no_results: Nothing Found
+  no_results_text: Sorry, but nothing matched your search terms. Please try again with some different keywords.
+  results_for: Results For
+  category_label: Category
+  author_label: Author
+  archive_label: Archive
+login:
+  title: Log in
+  heading: Log in
+  username_label: Username or Email
+  password_label: Password
+  submit_label: Log In
+  logged_in_as: Logged in as
+  log_out_label: Log Out
+  admin_label: Admin
+  user_label: User
+account:
+  log_in: Log in
+  sign_up: Get Started
+  log_out: Log out
+  my_hub: My Hub
+  admin_label: Admin
+hub:
+  title: My Hub
+  greeting: Welcome back, {name}
+  member_since: Member since {date}
+  recommended: Recommended for you
+  answers_button: Update my answers
+  answers_heading: Your answers
+  retake_survey: Retake the survey
+  close: Close
+  take_survey: Take the 1-minute survey
+  explore_heading: Jump back in
+  for_you: For you
+  account_heading: Account
+  edit: Edit
+  save: Save changes
+  cancel: Cancel
+  saved: Saved.
+  username_locked: This account’s username can’t be changed.
+  name_label: Name
+  username_label: Username
+  email_label: Email
+  role_label: Account type
+  tiles:
+  - key: clinical
+    icon: fa-solid fa-user-doctor
+    label: Clinical Teams
+    text: Point-of-care guidance, faster onboarding, less admin.
+    url: /explore/#clinical-teams
+  - key: training
+    icon: fa-solid fa-people-group
+    label: Care Team Training
+    text: Collaborative XR scenarios with AI feedback.
+    url: /explore/#care-team-training
+  - key: pharmacy
+    icon: fa-solid fa-prescription-bottle-medical
+    label: Pharmacy
+    text: Fewer medication errors, smoother workflows.
+    url: /explore/#pharmacy
+  - key: research
+    icon: fa-solid fa-newspaper
+    label: Articles
+    text: Insights on XR, AI and the future of care.
+    url: /explore/#articles
+  - key: exploring
+    icon: fa-solid fa-people-line
+    label: About Us
+    text: Meet the team behind XRCare.
+    url: /about-us/
+  - key: evaluating
+    icon: fa-solid fa-envelope
+    label: Contact
+    text: Book a conversation with our team.
+    url: /contact/
+auth:
+  panel_heading: Care teams, amplified.
+  panel_text: Immersive XR practice and a proactive AI co-pilot, built for the people who deliver care.
+  panel_points:
+  - Zero-risk skill practice
+  - AI coaching that adapts to you
+  - Privacy-first by design
+  login_subheading: Welcome back. Log in to continue.
+  no_account: Don’t have an account?
+  sign_up_link: Sign up here
+  show_password: Show password
+  hide_password: Hide password
+  continue_label: Continue
+signup:
+  title: Sign up
+  heading: Create your account
+  subheading: It takes less than a minute.
+  name_label: Full Name
+  username_label: Username
+  username_hint: 3-40 letters, numbers, dots, dashes or underscores
+  email_label: Email
+  password_label: Password
+  password_hint: At least 6 characters
+  confirm_label: Confirm Password
+  submit_label: Create Account
+  password_mismatch: Passwords do not match
+  have_account: Already have an account?
+  log_in_link: Log in
+  strength:
+  - Too short
+  - Weak
+  - Okay
+  - Strong
+  - Very strong
+survey:
+  title: Welcome
+  heading: Let’s tailor XRCare to you
+  greeting: Hi {name}!
+  intro: Six quick questions so we can show you what matters most.
+  start_label: Start
+  skip_label: Skip for now
+  back_label: Back
+  next_label: Next
+  finish_label: Finish
+  saving_label: Saving...
+  step_label: Question {n} of {total}
+  choose_up_to: Choose up to {max}
+  key_hint: 'Tip: press a letter key to choose'
+  done_heading: You’re all set, {name}!
+  done_text: Based on your answers, here’s the best place to start.
+  done_secondary:
+    label: Go to My Hub
+    url: /account/

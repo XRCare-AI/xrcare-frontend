@@ -7,17 +7,18 @@ import { currentUser } from './account.js';
 document.addEventListener("DOMContentLoaded", async () => {
     const stage = document.querySelector("[data-survey-stage]");
     const progress = document.querySelector(".survey__progress");
-    const [user, site] = await Promise.all([currentUser(), getSite().catch(() => ({ settings: {} }))]);
+    const [user, site] = await Promise.all([currentUser(), getSite()]);
     if (!user) {
         location.replace(siteURL("/login/") + "?next=" + encodeURIComponent(location.pathname));
         return;
     }
-    const s = site.settings.survey;
-    if (!s?.questions?.length) {
+    // Wording comes with the site; the questions from the backend, which stores and checks the answers
+    const s = site.settings.survey || {};
+    const questions = await apiRequest("/api/survey").catch(() => []);
+    if (!questions.length) {
         showError(new Error("The survey could not be loaded. Please try again shortly."));
         return;
     }
-    const questions = s.questions;
     const answers = { ...(user.survey || {}) };   // retaking the survey starts from the earlier answers
     const firstName = user.name.trim().split(/\s+/)[0];
     const fill = (text, values) => (text || "").replace(/\{(\w+)\}/g, (_, key) => values[key] ?? "");
