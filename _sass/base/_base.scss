@@ -169,3 +169,15 @@ h6 {
 [hidden] {
   display: none !important;
 }
+
+// Focus stays visible on every interactive surface, including the fixed navigation.
+:focus-visible { outline: 2px solid $accent; outline-offset: 4px; }
+#main:focus { outline: none; }
+body.menu-open { overflow: hidden; }
+html { scroll-padding-top: 90px; }
+button, input, select, textarea { font: inherit; }
+button, a { -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce) {
+  html:has(body.is-flow) { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

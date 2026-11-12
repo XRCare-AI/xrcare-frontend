@@ -85,18 +85,15 @@ sections:
     - icon: fa-solid fa-gauge-high
       title: Improve Efficiency
       text: >-
-        Smarter workflows and real-time AI support mean tasks take less time. From medication dispensing to bedside
-        care, your team can work faster without sacrificing quality.
+        Spend less time on routine tasks with real-time AI support. Keep your team focused on care.
     - icon: fa-solid fa-vr-cardboard
       title: Enhance Work Capabilities
       text: >-
-        XR immerses clinicians in lifelike scenarios while AI provides personalized coaching. Together, they expand
-        professional skills, confidence and adaptability for critical situations.
+        Build skills in lifelike XR scenarios with personalized AI coaching. Practice critical situations with confidence.
     - icon: fa-solid fa-brain
       title: Reduce Errors, Lighten Cognitive Load
       text: >-
-        AI catches risks before they become mistakes, and XR practice can reduce stress under pressure. The result:
-        fewer errors, sharper focus and better decision-making.
+        Surface risks with AI support and practice safely in XR. Reduce cognitive load during critical decisions.
 - slug: Critical-areas-of-impact
   name: Critical Areas of Impact
   layout: audiences

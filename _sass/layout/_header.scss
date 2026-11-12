@@ -301,3 +301,24 @@
     &::after { transform: translateY(-6px) rotate(-45deg); }
   }
 }
+
+.header-contact {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 12px;
+  border: 1px solid rgba($accent, 0.5);
+  border-radius: 999px;
+  color: $accent;
+  font-size: 14px;
+  font-weight: 600;
+  @include below($bp-header) { display: inline-flex; }
+}
+.menu-toggle { min-height: 44px; min-width: 44px; }
+.site-header__links a { min-height: 44px; display: flex; align-items: center; }
+@include below(400px) {
+  .site-header__inner { gap: 8px; padding: 0 16px; }
+  .site-header__actions { gap: 12px; }
+  .menu-toggle__label { @include sr-only; }
+}

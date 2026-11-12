@@ -6,6 +6,8 @@ scripts:
 ---
 <!-- One article: /articles/post/?slug=<slug>, from GET /api/articles/<slug> -->
 <article class="article-page">
+  <div class="container article-feedback" data-article-feedback><p role="status">Loading article…</p></div>
+  <div data-article-content hidden>
   <header class="article-hero">
     <div class="article-hero__image" data-article-image aria-hidden="true"></div>
     <div class="article-hero__shade" aria-hidden="true"></div>
@@ -22,5 +24,6 @@ scripts:
   <div class="share-button" data-share hidden>
     <button type="button" class="share-button__toggle" aria-expanded="false"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i><span class="sr-only" data-site-text="blog.share"></span></button>
     <a class="share-button__link" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-hidden="true"></i> <span data-site-text="blog.share"></span></a>
+  </div>
   </div>
 </article>

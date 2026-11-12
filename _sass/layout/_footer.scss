@@ -49,7 +49,7 @@
 
   &__copyright {
     margin: 22px 0 0;
-    color: rgba($white, 0.4);
+    color: $muted;
     font-size: 12.5px;
     line-height: 1.6;
   }
@@ -128,3 +128,6 @@
 
   &__value { overflow-wrap: anywhere; }
 }
+
+.site-footer__menu a, .site-footer__contact a { display: inline-flex; align-items: center; min-height: 44px; overflow-wrap: anywhere; }
+.site-footer__contact { min-width: 0; }

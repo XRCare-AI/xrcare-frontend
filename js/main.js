@@ -68,18 +68,47 @@ function setUpMenu() {
     const backdrop = document.querySelector(".slide-out-bg");
     if (!toggle || !panel) return;
 
-    const setOpen = open => {
+    let opened = false;
+    let background = [];
+    const desktop = matchMedia("(min-width: 1000px)");
+    const focusable = () => [...panel.querySelectorAll('a[href], button:not([disabled]), input:not([disabled])')]
+        .filter(node => !node.closest('[hidden]') && node.getClientRects().length);
+    const setOpen = (open, restoreFocus = true) => {
+        if (open === opened) return;
+        opened = open;
         document.body.classList.toggle("menu-open", open);
         toggle.setAttribute("aria-expanded", String(open));
         backdrop.hidden = !open;
+        panel.inert = !open;
+        if (open) {
+            background = [...document.body.children]
+                .filter(node => node !== panel && node !== backdrop && !['SCRIPT', 'STYLE'].includes(node.tagName))
+                .map(node => [node, node.inert]);
+            background.forEach(([node]) => { node.inert = true; });
+            panel.querySelector(".slide-out__close").focus();
+        } else {
+            background.forEach(([node, inert]) => { node.inert = inert; });
+            background = [];
+            if (restoreFocus) toggle.focus();
+        }
     };
 
-    toggle.addEventListener("click", () => setOpen(!document.body.classList.contains("menu-open")));
+    toggle.addEventListener("click", () => setOpen(!opened));
     backdrop.addEventListener("click", () => setOpen(false));
     panel.querySelector(".slide-out__close").addEventListener("click", () => setOpen(false));
-    document.addEventListener("keydown", e => { if (e.key === "Escape") setOpen(false); });
-    // In-page links (#contact-info) close the menu
-    panel.addEventListener("click", e => { if (e.target.closest("a")) setOpen(false); });
+    document.addEventListener("keydown", event => {
+        if (!opened) return;
+        if (event.key === "Escape") { event.preventDefault(); setOpen(false); }
+        if (event.key === "Tab") {
+            const nodes = focusable(), first = nodes[0], last = nodes.at(-1);
+            if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+            else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+        }
+    });
+    panel.addEventListener("click", event => { if (event.target.closest("a")) setOpen(false); });
+    desktop.addEventListener("change", event => { if (event.matches) setOpen(false, false); });
+    addEventListener("pageshow", () => setOpen(false, false));
+
 }
 
 // The transparent header turns to frosted glass once the page scrolls

@@ -62,3 +62,24 @@ make stop       # stops it
 
 ## Deploying
 `.github/workflows/jekyll-gh-pages.yml` builds and publishes the site to GitHub Pages on every push to `main`, passing the Pages path (`/xrcare-frontend`) as `--baseurl` so every link, stylesheet, script and image works there; locally `baseurl` stays `""`. Once the backend is hosted, set `deployedPythonURI` in `js/api/config.js` and add the frontend's address to the backend's CORS list (`ALLOWED_ORIGINS` in its `.env`).
+
+## UI/UX review
+
+Navigation, feature readability, and the Explore article collection follow
+[issue #1](https://github.com/XRCare-AI/xrcare-frontend/issues/1) and
+[issue #3](https://github.com/XRCare-AI/xrcare-frontend/issues/3).
+The website shown in the feedback is the xrcare.ai reference described above;
+its current implementation is this Jekyll frontend.
+
+Account and personalization work is tracked separately in
+[issue #2](https://github.com/XRCare-AI/xrcare-frontend/issues/2): the purpose, role,
+work setting, goals, XR experience, and team-size fields are defined in the backend's
+`model/survey.py`. Keep the survey skippable, allow answers to be edited from
+My Hub, and verify that saved answers affect the recommended destination.
+The related API contracts are `GET /api/survey`, `PUT /api/user/survey`, and
+`GET /api/id`. Public browsing and contact access do not require sign-in.
+
+Article search uses the backend's full-text search, category, author, and
+archive filters. The URL preserves these filters and sort order; article
+breadcrumbs return to that collection. Loading, empty, unavailable, and missing
+article states stay inside the page, with recovery links or retry controls.

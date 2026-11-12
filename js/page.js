@@ -1,3 +1,4 @@
+import { articleList } from './articles.js';
 import { apiRequest } from './api/config.js';
 import { getSite, getPage, siteURL, el, lines, formatDate, showError } from './site.js';
 import { setTitle } from './main.js';
@@ -103,125 +104,14 @@ function copilotGraphic(c) {
         ...nodes);
 }
 
-// Capability explorer: icons on a ring with the chosen one's description beside them. Once the explorer is scrolled
-// into view, a line draws itself around the active icon; when it closes, the next capability is shown. Clicking an
-// icon shows that one and stops the timer for good; hovering pauses it.
+// Keep every capability readable at once; no icon-only controls or automatic content rotation.
 function capabilityExplorer(c) {
-    const ns = "http://www.w3.org/2000/svg";
-    const items = c.items || [];
-    let current = 0;
-    const buttons = [], panels = [], centers = [];
-
-    const timerRing = () => {
-        const svg = document.createElementNS(ns, "svg");
-        svg.setAttribute("class", "capability-orbit__timer");
-        svg.setAttribute("viewBox", "0 0 60 60");
-        svg.setAttribute("aria-hidden", "true");
-        const circle = document.createElementNS(ns, "circle");
-        Object.entries({ cx: 30, cy: 30, r: 28, pathLength: 1 }).forEach(([k, v]) => circle.setAttribute(k, v));
-        svg.append(circle);
-        return svg;
-    };
-
-    const select = i => {
-        current = (i + items.length) % items.length;
-        buttons.forEach((b, j) => {
-            const on = j === current;
-            b.classList.toggle("is-active", on);
-            b.setAttribute("aria-pressed", String(on));
-            // Restart the ring on the newly active icon
-            const circle = b.querySelector("circle");
-            circle.style.animation = "none";
-            void circle.getBoundingClientRect();
-            circle.style.animation = "";
-        });
-        centers.forEach((n, j) => n.classList.toggle("is-active", j === current));
-        panels.forEach((p, j) => { p.hidden = j !== current; });
-    };
-
-    items.forEach((item, i) => {
-        const angle = (i / items.length) * 2 * Math.PI - Math.PI / 2;
-        const button = el("button", { class: "capability-orbit__item", type: "button", "aria-pressed": "false",
-            "aria-label": item.title, "aria-controls": `capability-panel-${i}`,
-            style: { left: 50 + 42 * Math.cos(angle) + "%", top: 50 + 42 * Math.sin(angle) + "%" } },
-            timerRing(), icon(item.icon));
-        button.addEventListener("click", () => {
-            root.classList.add("is-stopped");
-            select(i);
-        });
-        button.querySelector("circle").addEventListener("animationend", () => {
-            if (button.classList.contains("is-active") && !root.classList.contains("is-stopped")) select(current + 1);
-        });
-        buttons.push(button);
-        centers.push(el("span", { class: "capability-orbit__icon" }, icon(item.icon)));
-        panels.push(el("div", { class: "capability-panel", id: `capability-panel-${i}`, "aria-live": "polite", hidden: "" },
-            el("span", { class: "capability-panel__number", "aria-hidden": "true" }, pad(i + 1)),
-            el("h3", { class: "capability-panel__title" }, item.title),
-            el("p", { class: "capability-panel__text" }, item.text)));
-    });
-
-    const root = el("div", { class: "capabilities__stage" },
-        el("div", { class: "capability-orbit" },
-            el("div", { class: "capability-orbit__ring", "aria-hidden": "true" }),
-            ...buttons,
-            el("div", { class: "capability-orbit__center", "aria-hidden": "true" }, ...centers)),
-        el("div", { class: "capabilities__panels" }, ...panels));
-    select(0);
-    // Start the timer only once most of the explorer is on screen
-    const observer = new IntersectionObserver(([entry]) => {
-        if (!entry.isIntersecting) return;
-        root.classList.add("is-playing");
-        observer.disconnect();
-    }, { threshold: 0.6 });
-    observer.observe(root);
-    return root;
-}
-
-// Articles for the Explore hub: search box and category chips filter the list (GET /api/articles);
-// ?category= ?author= ?month= ?s= in the page address (old /articles/ links) still work
-function articleList(c) {
-    const query = new URLSearchParams(location.search);
-    const search = el("input", { class: "articles__search-input", type: "search", placeholder: c.search_placeholder || "",
-        "aria-label": c.search_placeholder || "Search", value: query.get("s") || "" });
-    const chips = el("div", { class: "articles__chips", role: "group", "aria-label": "Categories" });
-    const grid = el("div", { class: "articles__grid", "aria-live": "polite" });
-    let all = [], category = query.get("category") || "";
-
-    function draw() {
-        const words = search.value.trim().toLowerCase();
-        const shown = all.filter(a => (!category || a.categories.some(cat => cat.slug === category))
-            && (!words || `${a.title} ${a.excerpt} ${a.author}`.toLowerCase().includes(words)));
-        chips.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.slug === category)));
-        grid.replaceChildren(...(shown.length ? shown.map((a, i) => {
-            const url = siteURL(`/articles/post/?slug=${encodeURIComponent(a.slug)}`);
-            return el("a", { class: "article-card", href: url, style: stagger(i, 80) },
-                el("span", { class: "article-card__image" }, a.image ? el("img", { src: siteURL(a.image), alt: "", loading: "lazy" }) : null),
-                el("span", { class: "article-card__body" },
-                    el("span", { class: "article-card__meta" }, formatDate(a.published).long, " · ", a.categories.map(cat => cat.name).join(", ")),
-                    el("h3", { class: "article-card__title" }, a.title),
-                    el("span", { class: "article-card__excerpt" }, a.excerpt),
-                    el("span", { class: "article-card__more" }, c.read_more || "Read", icon("fa-solid fa-arrow-right"))));
-        }) : [el("p", { class: "articles__empty" }, c.no_results)]));
-    }
-
-    search.addEventListener("input", draw);
-    const passThrough = new URLSearchParams([...query].filter(([k]) => k === "author" || k === "month"));
-    apiRequest(`/api/articles?${passThrough}`).then(({ articles }) => {
-        all = articles;
-        const categories = new Map(articles.flatMap(a => a.categories.map(cat => [cat.slug, cat.name])));
-        const chip = (slug, name) => {
-            const b = el("button", { type: "button", class: "articles__chip", "data-slug": slug, "aria-pressed": "false" }, name);
-            b.addEventListener("click", () => { category = slug; draw(); });
-            return b;
-        };
-        chips.replaceChildren(chip("", c.all_label || "All"), ...[...categories].map(([slug, name]) => chip(slug, name)));
-        draw();
-    }).catch(error => grid.replaceChildren(el("p", { class: "articles__empty" }, error.message)));
-
-    return el("div", { class: "articles" },
-        el("div", { class: "articles__toolbar" },
-            el("label", { class: "articles__search" }, icon("fa-solid fa-magnifying-glass"), search), chips),
-        grid);
+    return el("div", { class: "capabilities__grid" }, ...(c.items || []).map((item, i) =>
+        el("article", { class: "capability-card" },
+            el("span", { class: "capability-card__icon", "aria-hidden": "true" }, icon(item.icon)),
+            el("span", { class: "capability-card__number", "aria-hidden": "true" }, pad(i + 1)),
+            el("h3", {}, item.title),
+            el("p", {}, item.text))));
 }
 
 // Sticky row of links to the sections below; the one in view is highlighted

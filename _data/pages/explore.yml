@@ -37,18 +37,18 @@ sections:
   theme: dark
   content:
     title: For Clinical Teams
-    heading: Delivering the Power of XR + AI to Clinical Teams
+    heading: More patient time. Less admin.
     text: >-
-      The frontline solution is here: XR Care for Clinical Teams delivers less admin load, more patient time, better
-      training and Point-of-care guidance, leading to safer, higher-quality patient outcomes.
+      AI-assisted documentation and point-of-care guidance help clinical teams spend less time on admin
+      and keep their focus on patient care.
     image: /images/clinical-teams.jpg
     features:
     - icon: fa-solid fa-graduation-cap
-      title: Accelerate Training & Onboarding
-      text: Interactive XR simulations speed up readiness in ED, med-surg, LTC, and home health.
+      title: Point-of-Care Guidance
+      text: Context-aware support brings relevant information into the care workflow.
     - icon: fa-solid fa-heart-pulse
-      title: Zero-Risk Skill Practice
-      text: Practice procedures safely before applying them to real patients.
+      title: More Time for Patients
+      text: Streamline routine workflows so clinical teams can focus on bedside care.
     - icon: fa-solid fa-file-medical
       title: Reduce Administrative Burden
       text: AI-assisted charting, coding, and reporting free nurses for patient care.
@@ -61,11 +61,10 @@ sections:
   theme: dark
   content:
     title: For Care Team Training
-    heading: Delivering the Power of XR + AI to Care Team Training
+    heading: Build confidence before care begins.
     text: >-
-      Where AI Meets Learning: Building confidence through collaborative team scenarios, advancing skills with consistent,
-      AI-driven modules, and supporting growth with personalized analytics—all designed to empower care teams to
-      support peak-level performance.
+      Practice procedures safely in lifelike XR scenarios, strengthen teamwork, and use AI feedback to guide
+      continued learning before applying skills to patient care.
     image: /images/care-team-training.jpg
     reverse: true
     features:
@@ -100,9 +99,9 @@ sections:
   layout: articles
   theme: dark
   content:
-    heading: Articles
+    heading: Ideas for the future of care
     text: Insights from the XRCare team on XR, AI and the future of care.
     search_placeholder: Search articles
-    all_label: All
+    all_label: All topics
     read_more: Read article
     no_results: No articles match your search.

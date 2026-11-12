@@ -6,7 +6,7 @@
 <html lang="en-US">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="baseurl" content="{{ site.baseurl }}">
   <title>{{ site.title }}</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
@@ -26,7 +26,7 @@
   {% include header.html variant=header_variant %}
   {% include slide-out-menu.html %}
 
-  <main id="main">
+  <main id="main" tabindex="-1">
     {{ content }}
   </main>
 

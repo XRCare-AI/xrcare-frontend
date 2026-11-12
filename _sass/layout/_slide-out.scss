@@ -137,3 +137,7 @@
   background: rgba($ink, 0.5);
   backdrop-filter: blur(2px);
 }
+
+.slide-out { overscroll-behavior: contain; height: 100dvh; }
+.slide-out__close { width: 44px; height: 44px; }
+.slide-out__social a { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; }
