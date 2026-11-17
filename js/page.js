@@ -104,14 +104,78 @@ function copilotGraphic(c) {
         ...nodes);
 }
 
-// Keep every capability readable at once; no icon-only controls or automatic content rotation.
+// Capability explorer: icons on a ring with the chosen one's description beside them. Once the explorer is scrolled
+// into view, a line draws itself around the active icon; when it closes, the next capability is shown. Clicking an
+// icon shows that one and stops the timer for good; hovering pauses it.
 function capabilityExplorer(c) {
-    return el("div", { class: "capabilities__grid" }, ...(c.items || []).map((item, i) =>
-        el("article", { class: "capability-card" },
-            el("span", { class: "capability-card__icon", "aria-hidden": "true" }, icon(item.icon)),
-            el("span", { class: "capability-card__number", "aria-hidden": "true" }, pad(i + 1)),
-            el("h3", {}, item.title),
-            el("p", {}, item.text))));
+    const ns = "http://www.w3.org/2000/svg";
+    const items = c.items || [];
+    let current = 0;
+    const buttons = [], panels = [], pictures = [];
+
+    const timerRing = () => {
+        const svg = document.createElementNS(ns, "svg");
+        svg.setAttribute("class", "capability-orbit__timer");
+        svg.setAttribute("viewBox", "0 0 60 60");
+        svg.setAttribute("aria-hidden", "true");
+        const circle = document.createElementNS(ns, "circle");
+        Object.entries({ cx: 30, cy: 30, r: 28, pathLength: 1 }).forEach(([k, v]) => circle.setAttribute(k, v));
+        svg.append(circle);
+        return svg;
+    };
+
+    const select = i => {
+        current = (i + items.length) % items.length;
+        buttons.forEach((b, j) => {
+            const on = j === current;
+            b.classList.toggle("is-active", on);
+            b.setAttribute("aria-pressed", String(on));
+            // Restart the ring on the newly active icon
+            const circle = b.querySelector("circle");
+            circle.style.animation = "none";
+            void circle.getBoundingClientRect();
+            circle.style.animation = "";
+        });
+        pictures.forEach((n, j) => n && n.classList.toggle("is-active", j === current));
+        panels.forEach((p, j) => { p.hidden = j !== current; });
+    };
+
+    items.forEach((item, i) => {
+        const angle = (i / items.length) * 2 * Math.PI - Math.PI / 2;
+        const button = el("button", { class: "capability-orbit__item", type: "button", "aria-pressed": "false",
+            "aria-label": item.title, "aria-controls": `capability-panel-${i}`,
+            style: { left: 50 + 42 * Math.cos(angle) + "%", top: 50 + 42 * Math.sin(angle) + "%" } },
+            timerRing(), icon(item.icon));
+        button.addEventListener("click", () => {
+            root.classList.add("is-stopped");
+            select(i);
+        });
+        button.querySelector("circle").addEventListener("animationend", () => {
+            if (button.classList.contains("is-active") && !root.classList.contains("is-stopped")) select(current + 1);
+        });
+        buttons.push(button);
+        pictures.push(item.image ? el("img", { class: "capability-orbit__image", src: assetURL(item.image), alt: item.image_alt || "" }) : null);
+        panels.push(el("div", { class: "capability-panel", id: `capability-panel-${i}`, "aria-live": "polite", hidden: "" },
+            el("span", { class: "capability-panel__number", "aria-hidden": "true" }, pad(i + 1)),
+            el("h3", { class: "capability-panel__title" }, item.title),
+            el("p", { class: "capability-panel__text" }, item.text)));
+    });
+
+    const root = el("div", { class: "capabilities__stage" },
+        el("div", { class: "capability-orbit" },
+            el("div", { class: "capability-orbit__ring", "aria-hidden": "true" }),
+            ...buttons,
+            el("div", { class: "capability-orbit__center", "aria-hidden": "true" }, ...pictures)),
+        el("div", { class: "capabilities__panels" }, ...panels));
+    select(0);
+    // Start the timer only once most of the explorer is on screen
+    const observer = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        root.classList.add("is-playing");
+        observer.disconnect();
+    }, { threshold: 0.6 });
+    observer.observe(root);
+    return root;
 }
 
 // Sticky row of links to the sections below; the one in view is highlighted

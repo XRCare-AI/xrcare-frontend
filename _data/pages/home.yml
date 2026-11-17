@@ -78,21 +78,33 @@ sections:
     items:
     - icon: fa-solid fa-eye
       title: Context-Aware Intelligence
+      image: /images/capabilities/context-aware.jpg
+      image_alt: Clinician wearing XRCare glasses working with a holographic interface
       text: Knows the patient, order and protocol so guidance fits the care moment.
     - icon: fa-solid fa-wand-magic-sparkles
       title: Proactive Co-Pilot
+      image: /images/capabilities/proactive-copilot.jpg
+      image_alt: Pharmacist wearing XRCare glasses, guided at work with a tablet
       text: Spots a mismatch and guides the next step before it goes further.
     - icon: fa-solid fa-layer-group
       title: Multimodal Insight
+      image: /images/capabilities/multimodal.jpg
+      image_alt: XRCare smart glasses with cameras and a sensor ring
       text: Brings together what the glasses see, hear and read into one picture of the care in progress.
     - icon: fa-solid fa-diagram-project
       title: Adaptive Orchestration
+      image: /images/capabilities/orchestration.jpg
+      image_alt: XRCare Spatial AI glasses over the procedure and workflow dashboard
       text: Adjusts guidance to each procedure, device and nurse, step by step.
     - icon: fa-solid fa-arrows-rotate
       title: Human in the Loop
+      image: /images/capabilities/human-in-the-loop.jpg
+      image_alt: Confident nurse in the hospital
       text: The system offers context and suggestions; the nurse remains in control of each decision.
     - icon: fa-solid fa-shield-halved
       title: Privacy-First Design
+      image: /images/capabilities/privacy-first.jpg
+      image_alt: Close-up of the cameras built into the XRCare glasses
       text: Runs on the device with clear consent, designed to keep patient video in the room.
 - slug: Avoid-Burnout
   name: Modern Solutions
