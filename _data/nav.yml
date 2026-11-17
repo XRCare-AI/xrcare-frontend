@@ -1,7 +1,11 @@
 # The menu (top bar, slide-out menu and footer)
 
-- label: Home
+- label: Product
   url: /
+- label: How It Works
+  url: /#nurse-copilot
+- label: Solutions
+  url: /explore/
 - label: About Us
   url: /about-us/
 - label: Explore

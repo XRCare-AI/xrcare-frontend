@@ -1,6 +1,6 @@
 # Site settings (content itself comes from the xrcare-backend API: GET /api/site)
-title: XRCare AI
-description: XR-AI Care Co-Pilot. Delivering the power of XR + AI to healthcare.
+title: XRCare Spatial AI Nurse Co-Pilot
+description: Meet XRCare: smart glasses with on-device Spatial AI for nursing workflows, real-time guidance, Expert Assist and XR care team training.
 
 # "" locally; the GitHub Pages build passes the real path (/xrcare-frontend) with --baseurl (see .github/workflows)
 baseurl: ""

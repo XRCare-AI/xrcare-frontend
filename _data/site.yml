@@ -2,7 +2,7 @@
 # Pages read these through data-site-text="key.subkey" (js/main.js) and the page scripts.
 # (The survey's questions live in the backend, which stores the answers: GET /api/survey.)
 
-site_title: XRCare AI
+site_title: XRCare Spatial AI
 logo: /images/logo.png
 linkedin_url: https://www.linkedin.com/company/xrcare/about/
 menu_label: Menu
