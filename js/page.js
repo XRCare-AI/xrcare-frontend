@@ -130,6 +130,26 @@ function subnav(c) {
 }
 
 const LAYOUTS = {
+    // Product-first introduction: make the wearable and the bedside workflow visible immediately.
+    product(c) {
+        return el("div", { class: "container product-intro" },
+            el("div", { class: "product-intro__copy reveal" },
+                el("span", { class: "product-intro__eyebrow" }, c.eyebrow),
+                el("h2", { class: "product-intro__heading" }, c.heading),
+                el("p", { class: "product-intro__text" }, c.text),
+                el("div", { class: "product-intro__steps" }, ...(c.steps || []).map((step, i) =>
+                    el("article", { class: "product-step", style: stagger(i, 90) },
+                        el("span", { class: "product-step__number" }, `0${i + 1}`),
+                        el("div", {}, el("h3", { class: "product-step__title" }, step.title),
+                            el("p", { class: "product-step__text" }, step.text))))),
+                el("p", { class: "product-intro__note" }, icon("fa-solid fa-shield-halved"), c.note),
+                el("a", { class: "product-intro__link", href: c.link.url, target: "_blank", rel: "noreferrer" },
+                    c.link.label, icon("fa-solid fa-arrow-up-right-from-square"))),
+            el("figure", { class: "product-intro__visual reveal", style: stagger(1) },
+                el("img", { src: assetURL(c.image), alt: c.image_alt, loading: "eager" }),
+                el("figcaption", {}, "Smart glasses + spatial AI workflow")));
+    },
+
     // Home intro over the photo reel: the name and slogan on the left, see-through buttons to the main pages on the right
     spotlight(c) {
         const video = c.video ? el("video", { class: "spotlight__video", src: assetURL(c.video.src),

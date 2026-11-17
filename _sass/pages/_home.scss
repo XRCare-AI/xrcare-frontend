@@ -746,6 +746,98 @@ body.is-flow {
 
 // Call to action ---------------------------------------------------------------------------------------------------
 
+// Product-first home section --------------------------------------------------------------------------------------
+.page-section--product {
+  padding: 112px 0 120px;
+  background: radial-gradient(ellipse at 85% 35%, rgba($violet, 0.14), transparent 42%), $ink;
+
+  @include below($bp-phone) { padding: 76px 0 84px; }
+}
+
+.product-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 88px);
+
+  @include below($bp-header) { grid-template-columns: 1fr; }
+
+  &__eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: $accent;
+    font-family: $font-label;
+    font-size: 13px;
+    letter-spacing: 0.14em;
+  }
+
+  &__heading {
+    max-width: 650px;
+    margin: 0 0 20px;
+    color: $white;
+    font-family: $font-display;
+    font-size: clamp(34px, 4.2vw, 58px);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1.08;
+    text-wrap: balance;
+  }
+
+  &__text { max-width: 650px; color: rgba($white, 0.76); font-size: 17px; line-height: 1.75; }
+
+  &__steps {
+    display: grid;
+    gap: 17px;
+    margin: 30px 0 22px;
+  }
+
+  &__note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 19px;
+    color: rgba($white, 0.7);
+    font-size: 13px;
+    line-height: 1.55;
+
+    i { color: $accent; margin-top: 4px; }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: $accent;
+    font-weight: 600;
+
+    &:hover { color: $white; }
+  }
+
+  &__visual {
+    position: relative;
+    margin: 0;
+    padding: 12px;
+    border: 1px solid rgba($accent, 0.22);
+    border-radius: 28px;
+    background: linear-gradient(145deg, rgba($white, 0.09), rgba($white, 0.02));
+    box-shadow: 0 28px 90px rgba(#000, 0.42), 0 0 64px rgba($violet, 0.12);
+
+    img { width: 100%; border-radius: 19px; }
+    figcaption { padding: 12px 8px 3px; color: rgba($white, 0.58); font-size: 12px; letter-spacing: 0.04em; }
+  }
+}
+
+.product-step {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  gap: 12px;
+  align-items: start;
+
+  &__number { color: $accent; font-family: $font-display; font-size: 13px; padding-top: 2px; }
+  &__title { margin: 0 0 2px; color: $white; font-family: $font-display; font-size: 17px; font-weight: 600; }
+  &__text { margin: 0; color: rgba($white, 0.64); font-size: 14px; line-height: 1.55; }
+}
+
 .page-section--cta {
   padding: 40px 0 130px;
   background: #07102b;
