@@ -11,8 +11,8 @@ sections:
     title: Explore XRCare
     highlight: XRCare
     text: >-
-      Everything in one place: how the XR-AI Co-Pilot supports clinical teams, care team training and pharmacy,
-      plus our latest articles.
+      Explore XRCare’s smart-glasses nurse co-pilot and Spatial AI, along with XR clinical training and pharmacy
+      workflow solutions.
 - slug: jump
   name: ''
   layout: subnav
@@ -39,8 +39,8 @@ sections:
     title: For Clinical Teams
     heading: More patient time. Less admin.
     text: >-
-      AI-assisted documentation and point-of-care guidance help clinical teams spend less time on admin
-      and keep their focus on patient care.
+      XRCare supports frontline teams with point-of-care guidance, interactive XR training, and AI-assisted charting,
+      coding and reporting—helping reduce administrative work and make more time for patient care.
     image: /images/clinical-teams.jpg
     features:
     - icon: fa-solid fa-graduation-cap
@@ -88,8 +88,8 @@ sections:
     title: For Pharmacy
     heading: Delivering the Power of XR + AI to Pharmacy
     text: >-
-      AI-driven XR simulations help pharmacists reduce medication errors and allows individuals and teams to optimize
-      workflows.
+      XRCare Pharmacy delivers XR-AI workflow guidance through XR glasses and compatible devices, supporting pharmacists
+      and technicians in day-to-day medication workflows.
     image: /images/pharmacy.jpg
     cta:
       label: Talk to Our Team
