@@ -50,6 +50,7 @@ make stop       # stops it
 - `js/article.js`: one article with Previous/Next Post and Share.
 - `js/hub.js`: My Hub.
 - `js/contact.js`: builds the contact form from `/api/contact/form` and sends it to `/api/contact`.
+- `js/chatbot.js`: the public chat bubble on every page. Gets its wording from `GET /api/chat` and answers from `POST /api/chat`; it only appears when the backend is running and has an AI key. Styles in `_sass/components/_chatbot.scss` (all inside `.chatbot`, built from the tokens, no gradients).
 - `js/effects.js`: the moving network drawn behind the sign up panel.
 - `js/auth.js`, `js/login.js`, `js/signup.js`: log in and sign up forms (show/hide password, strength meter).
 - `js/survey.js`: the first-login survey, one question per screen (letter keys pick answers).
@@ -57,7 +58,7 @@ make stop       # stops it
   - `abstracts/`: tokens (colors, fonts, breakpoints) and mixins
   - `base/`: reset, typography, container
   - `layout/`: header, slide-out menu, footer and contact panel
-  - `components/`: pill buttons, contact form
+  - `components/`: pill buttons, contact form, chat bubble
   - `pages/`: home (plus what every dark page shares), flow (Explore, About Us, Contact, an article, 404), hub, log in / sign up, survey
 
 ## Deploying

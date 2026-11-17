@@ -41,6 +41,7 @@
   {%- endif %}
   <script type="module" src="{{ '/js/main.js' | relative_url }}"></script>
   <script type="module" src="{{ '/js/contact.js' | relative_url }}"></script>
+  <script type="module" src="{{ '/js/chatbot.js' | relative_url }}"></script>
   {% for script in layout.scripts %}<script type="module" src="{{ script | relative_url }}"></script>
   {% endfor %}{% for script in page.scripts %}<script type="module" src="{{ script | relative_url }}"></script>
   {% endfor %}
