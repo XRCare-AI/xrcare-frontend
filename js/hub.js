@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                     canEdit
                         ? el("input", { class: "hub-row__input", id, name: f.key, type: f.type, autocomplete: f.autocomplete,
                             value: current[f.key] || "", required: f.key !== "email" ? "" : null, spellcheck: "false" })
-                        : el("span", { class: "hub-row__value" }, valueOf(current, f.key)),
+                        : el("span", { class: "hub-row__value", translate: f.key === "role" ? null : "no" }, valueOf(current, f.key)),
                     editing && f.locked && f.locked() && f.hint ? el("span", { class: "hub-row__hint" }, f.hint) : null));
         }));
         if (editing) fieldsHolder.querySelector("input")?.focus();

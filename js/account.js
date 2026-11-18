@@ -3,14 +3,22 @@ import { siteURL } from './site.js';
 
 // Who is logged in (GET /api/id), asked once per page: the user, or null when logged out
 let userRequest;
+let unreachable = false;
 export function currentUser() {
-    userRequest ??= apiRequest('/api/id').catch(() => null);
+    userRequest ??= apiRequest('/api/id').catch(error => {
+        unreachable = !error.status;   // no answer at all (server down), as opposed to "not logged in"
+        return null;
+    });
     return userRequest;
 }
+
+// True when the last currentUser() got no answer from the backend, so "null" means "unknown", not "logged out"
+export const backendUnreachable = () => unreachable;
 
 export async function logOut() {
     await apiRequest('/api/authenticate', 'DELETE').catch(() => null);
     userRequest = Promise.resolve(null);
+    window.XRCareTheme?.clear();   // the next visitor on this browser gets the site as designed
 }
 
 // Where to go after logging in or signing up: the survey the first time, else ?next= (same site only) or My Hub
@@ -36,6 +44,7 @@ export function showAccount(user) {
     };
     document.querySelectorAll('[data-account]').forEach(node => {
         node.textContent = details[node.dataset.account] ?? '';
+        node.translate = false;   // a name or initials, never translated (Language preference: "AS" is not "como")
     });
 }
 

@@ -2,7 +2,7 @@
 
 Frontend for the XRCare AI site, a Jekyll site styled with Sass only. It matches the layout and look of [xrcare.ai](https://xrcare.ai). The backend is [xrcare-backend](https://github.com/XRCare-AI/xrcare-backend), using the same split as the Open Coding Society [pages](https://github.com/Open-Coding-Society/pages) (frontend) and [flask](https://github.com/Open-Coding-Society/flask) (backend) repos.
 
-**The site works on its own.** Every page's content (wording, menu, sections, images) lives in this repo, in `_data/`, and is built into the pages, so the deployed site needs no server. Only the parts that use the backend's database need it: log in / sign up, the first-login survey, My Hub, the articles and the contact form. Without the backend those show "The XRCare server has not been connected to this site yet." and everything else works.
+**The site works on its own.** Every page's content (wording, menu, sections, images) lives in this repo, in `_data/`, and is built into the pages, so the deployed site needs no server. Only the parts that use the backend's database need it: log in / sign up, the first-login survey, My Hub, Preferences, the articles and the contact form. Without the backend those show "The XRCare server has not been connected to this site yet." and everything else works.
 
 To change what the site says, edit `_data/`:
 - `_data/site.yml`: site-wide wording and links (header, footer, log in / sign up, survey screens, My Hub, 404)
@@ -31,6 +31,7 @@ make stop       # stops it
 | `/signup/` | Create an account | `POST /api/user` |
 | `/welcome/` | First-login survey | questions: `GET /api/survey`; answers: `PUT /api/user/survey` |
 | `/account/` | My Hub: recommendation, survey answers (pop-up), editable account details, links into the site | `GET /api/id`, `GET /api/survey`, `PUT /api/user` |
+| `/account/preferences/` | Preferences (account menu, top right): theme presets, my themes, create with AI, colors, font, text size, button style, live preview; language; text-to-speech; head-tracking cursor. Laid out like Open Coding Society's dashboard Preferences tab | `GET /api/id`, `PUT`/`DELETE /api/user/preferences`, `POST /api/user/preferences/ai-theme` |
 | `/for-clinicalteams/`, `/care-team-training/`, `/articles/` | Old addresses: redirect to their part of `/explore/` (keeping `?category=` etc.) | |
 | anything else | 404 Page Not Found (`404.html`) | `_data/site.yml` (`not_found`) |
 
@@ -49,6 +50,8 @@ make stop       # stops it
 - `js/page.js`: draws a page's sections by `layout` (`spotlight`, `copilot`, `capabilities`, `pillars`, `audiences`, `cta`, `pagehead`, `subnav`, `audience`, `articles`, `about`, `team`) and fades them in.
 - `js/article.js`: one article with Previous/Next Post and Share.
 - `js/hub.js`: My Hub.
+- `js/theme.js`: applies the logged-in user's preferences on every page (a plain script in `<head>`, so the look is in place before the page paints). A theme is painted by copying `main.css` with the user's colors and font in place of the site's navy, white and cyan, and switching the original off; the site's own look leaves `main.css` untouched. Text size scales the page from 17px; language uses Google Translate; Alt+Shift+S reads selected text aloud. The backend holds the preferences; `localStorage` only keeps the logged-in user's copy so the next page paints straight away, and `js/main.js` corrects it from `GET /api/id`. Keep its lists (fonts, button styles, languages) in step with the backend's `model/preferences.py`.
+- `js/preferences.js`: the Preferences page. `js/head-tracking.js`: the webcam head-tracking pointer (MediaPipe, loaded only when turned on).
 - `js/contact.js`: builds the contact form from `/api/contact/form` and sends it to `/api/contact`.
 - `js/chatbot.js`: the public chat bubble on every page. Gets its wording from `GET /api/chat` and answers from `POST /api/chat`; it only appears when the backend is running and has an AI key. Styles in `_sass/components/_chatbot.scss` (all inside `.chatbot`, built from the tokens, no gradients).
 - `js/effects.js`: the moving network drawn behind the sign up panel.
@@ -59,7 +62,7 @@ make stop       # stops it
   - `base/`: reset, typography, container
   - `layout/`: header, slide-out menu, footer and contact panel
   - `components/`: pill buttons, contact form, chat bubble
-  - `pages/`: home (plus what every dark page shares), flow (Explore, About Us, Contact, an article, 404), hub, log in / sign up, survey
+  - `pages/`: home (plus what every dark page shares), flow (Explore, About Us, Contact, an article, 404), hub, preferences, log in / sign up, survey
 
 ## Deploying
 `.github/workflows/jekyll-gh-pages.yml` builds and publishes the site to GitHub Pages on every push to `main`, passing the Pages path (`/xrcare-frontend`) as `--baseurl` so every link, stylesheet, script and image works there; locally `baseurl` stays `""`. Once the backend is hosted, set `deployedPythonURI` in `js/api/config.js` and add the frontend's address to the backend's CORS list (`ALLOWED_ORIGINS` in its `.env`).

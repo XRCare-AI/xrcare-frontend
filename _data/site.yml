@@ -59,6 +59,7 @@ account:
   sign_up: Get Started
   log_out: Log out
   my_hub: My Hub
+  preferences: Preferences
   admin_label: Admin
 hub:
   title: My Hub

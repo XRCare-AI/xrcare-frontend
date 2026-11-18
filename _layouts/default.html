@@ -18,6 +18,9 @@
   <!-- Icons (xrcare.ai loads Font Awesome 6.5.0 from the same CDN) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <!-- The user's saved theme, text size and language, applied before the page first paints (after main.css,
+       which it reads to repaint) -->
+  <script src="{{ '/js/theme.js' | relative_url }}"></script>
 </head>
 <!-- Page settings (front matter): data_page (its sections from _data/pages/<name>.yml), body_class (is-flow = dark page), header (transparent | solid), title_setting
      (setting holding the tab title), footer: contact (adds the contact form) | none -->

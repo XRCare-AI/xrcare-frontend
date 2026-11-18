@@ -20,5 +20,6 @@
 @use "pages/home";       // home page sections, plus what every dark "flow" page shares
 @use "pages/flow";       // Explore, About Us, Contact, an article, 404
 @use "pages/hub";        // My Hub (/account/)
+@use "pages/preferences"; // Preferences (/account/preferences/), head-tracking pointer, Google Translate
 @use "pages/auth";       // Log in / Sign up
 @use "pages/survey";     // first-login survey
