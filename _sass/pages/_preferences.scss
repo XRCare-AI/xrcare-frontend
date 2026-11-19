@@ -1,0 +1,522 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Preferences (/account/preferences/): Appearance, Language & voice, Head tracking. Built on My Hub's page
+// (.hub, .hub-box, .hub-card__title) so the two account pages match.
+
+.prefs {
+  &__head { margin-bottom: 32px; }
+
+  &__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+    color: $muted;
+    font-size: 14px;
+
+    &:hover { color: $white; }
+  }
+
+  .hub__since { max-width: 640px; }
+  .hub-card__title i { color: $accent; font-size: 0.85em; margin-right: 4px; }
+}
+
+// Top tabs with an underline on the chosen one
+.prefs-tabs {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 28px;
+  border-bottom: 1px solid $line;
+  overflow-x: auto;
+
+  &__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    background: none;
+    color: $muted;
+    font-family: $font-body;
+    font-size: 15px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+
+    i { color: $accent; }
+
+    &:hover { color: $white; }
+
+    &[aria-selected="true"] {
+      color: $white;
+      border-bottom-color: $accent;
+    }
+
+    &:focus-visible { outline: 2px solid $accent; outline-offset: -2px; border-radius: 8px; }
+  }
+}
+
+.prefs-panel[hidden] { display: none; }
+
+.prefs-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(280px, 1fr);
+  gap: 24px;
+  align-items: start;
+
+  @include below($bp-header) { grid-template-columns: 1fr; }
+}
+
+.prefs-main { display: grid; gap: 24px; }
+
+.prefs-two {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: 24px;
+  align-items: start;
+
+  @include below($bp-header) { grid-template-columns: 1fr; }
+}
+
+.prefs-card {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+
+  .hub-card__title { margin: 0; }
+}
+
+.prefs-preview-card {
+  position: sticky;
+  top: $header-height + 20px;
+
+  @include below($bp-header) { position: static; }
+}
+
+// Numbered steps (1 Pick a starting point, 2 Fine-tune)
+.prefs-step {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  &__num {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: $gradient;
+    color: $ink;
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+// Presets / My themes / Create with AI
+.prefs-segments {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid $line;
+  border-radius: 999px;
+  background: rgba($white, 0.03);
+  justify-self: start;
+
+  @include below($bp-phone) { border-radius: 20px; }
+
+  &__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 0;
+    border-radius: 999px;
+    background: none;
+    color: $muted;
+    font-family: $font-body;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover { color: $white; }
+    &[aria-selected="true"] { background: rgba($accent, 0.16); color: $white; }
+    &:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+  }
+}
+
+.prefs-badge {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: $accent;
+  color: $ink;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.prefs-hint {
+  margin: 0;
+  color: $muted;
+  font-size: 14px;
+  line-height: 1.6;
+
+  a { text-decoration: underline; }
+  kbd {
+    padding: 1px 6px;
+    border: 1px solid $line;
+    border-radius: 6px;
+    background: rgba($white, 0.06);
+    color: $white;
+    font-family: $font-body;
+    font-size: 12.5px;
+  }
+}
+
+.prefs-empty { margin: 0; color: $muted; font-size: 14px; }
+.prefs-empty[hidden] { display: none; }
+
+.prefs-label {
+  margin: 6px 0 0;
+  color: $white;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+// Theme buttons: a small chip of the theme's colors and its name
+.prefs-swatches {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  gap: 10px;
+
+  &:empty { display: none; }
+}
+
+.prefs-swatch-wrap { position: relative; display: grid; }
+
+.prefs-swatch {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid $line;
+  border-radius: 14px;
+  background: rgba($white, 0.03);
+  color: rgba($white, 0.85);
+  font-family: $font-body;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+
+  &:hover { border-color: rgba($accent, 0.5); }
+  &[aria-pressed="true"] { border-color: $accent; background: rgba($accent, 0.12); color: $white; }
+  &:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+
+  &__chip {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    flex: none;
+    width: 34px;
+    height: 34px;
+    padding: 5px;
+    border: 2px solid;
+    border-radius: 10px;
+
+    span { flex: 1; height: 60%; border-radius: 3px; }
+    span + span { height: 35%; }
+  }
+
+  &__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  .prefs-swatch-wrap & { padding-right: 36px; }
+
+  &__delete {
+    position: absolute;
+    top: 50%;
+    right: 8px;
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: none;
+    color: $muted;
+    cursor: pointer;
+    transform: translateY(-50%);
+
+    &:hover, &:focus-visible { color: #ff9b9b; background: rgba($white, 0.08); outline: none; }
+  }
+}
+
+.prefs-inline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+
+  .prefs-input { flex: 1 1 220px; }
+}
+
+.prefs-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.prefs-chip {
+  padding: 6px 14px;
+  border: 1px solid $line;
+  border-radius: 999px;
+  background: none;
+  color: rgba($white, 0.8);
+  font-family: $font-body;
+  font-size: 13px;
+  cursor: pointer;
+
+  &:hover { border-color: rgba($accent, 0.5); color: $white; }
+}
+
+.prefs-ai-result {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid rgba($accent, 0.35);
+  border-radius: 18px;
+  background: rgba($accent, 0.06);
+
+  &[hidden] { display: none; }
+
+  &__swatch {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 1px solid $line;
+  }
+
+  &__title { margin: 0 0 4px; font-family: $font-display; font-size: 18px; color: $white; }
+  &__text { margin: 0 0 12px; color: $muted; font-size: 14px; line-height: 1.6; }
+}
+
+// Inputs
+.prefs-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+
+  @include below($bp-phone) { grid-template-columns: 1fr; }
+}
+
+.prefs-field {
+  display: grid;
+  gap: 8px;
+  color: rgba($white, 0.85);
+  font-size: 14px;
+
+  &--wide { grid-column: 1 / -1; }
+}
+
+.prefs-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid rgba($white, 0.18);
+  border-radius: 12px;
+  background: rgba($white, 0.04);
+  color: $white;
+  font-family: $font-body;
+  font-size: 15px;
+
+  &:focus { outline: none; border-color: $accent; box-shadow: 0 0 0 3px rgba($accent, 0.2); }
+
+  option { background: $ink-raised; color: $white; }
+}
+
+.prefs-range {
+  width: 100%;
+  accent-color: $accent;
+}
+
+.prefs-colors {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  @include below($bp-phone) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.prefs-color {
+  display: grid;
+  gap: 8px;
+  color: rgba($white, 0.85);
+  font-size: 14px;
+
+  &__field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px;
+    border: 1px solid rgba($white, 0.18);
+    border-radius: 12px;
+    background: rgba($white, 0.04);
+  }
+
+  input[type="color"] {
+    flex: none;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: none;
+    cursor: pointer;
+
+    &::-webkit-color-swatch-wrapper { padding: 0; }
+    &::-webkit-color-swatch { border: 1px solid rgba($white, 0.3); border-radius: 8px; }
+    &::-moz-color-swatch { border: 1px solid rgba($white, 0.3); border-radius: 8px; }
+    &:focus-visible { outline: 2px solid $accent; outline-offset: 2px; }
+  }
+
+  code { color: $muted; font-size: 12.5px; }
+}
+
+// Live preview: painted inline with the form's colors (js/preferences.js), so it shows the draft, not the saved look
+.prefs-preview {
+  overflow: hidden;
+  border: 1px solid $line;
+  border-radius: 18px;
+
+  &__bar { height: 8px; }
+  &__body { padding: 20px; }
+
+  h3 { margin: 0 0 10px; font-size: 20px; line-height: 1.3; font-weight: 600; }
+  p { margin: 0 0 18px; line-height: 1.6; }
+  [data-preview-selection] { padding: 0 3px; border-radius: 3px; }
+  a { text-decoration: underline; }
+
+  &__buttons { display: flex; flex-wrap: wrap; gap: 10px; }
+
+  &__button {
+    padding: 9px 18px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+}
+
+.prefs-checks {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 14px;
+
+  li { display: flex; justify-content: space-between; gap: 12px; color: $muted; }
+  // Text color with a colored mark, so the result reads on light and dark themes alike
+  strong { color: $white; font-weight: 600; }
+  strong::before { margin-right: 6px; }
+  [data-status="pass"]::before { content: "\2713"; color: #22b867; }
+  [data-status="warning"]::before { content: "\26A0"; color: #e6a100; }
+}
+
+// Head tracking
+.prefs-tracking { max-width: 760px; }
+
+.prefs-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: $white;
+  font-size: 15px;
+  cursor: pointer;
+
+  input { position: absolute; opacity: 0; pointer-events: none; }
+
+  &__track {
+    position: relative;
+    flex: none;
+    width: 46px;
+    height: 26px;
+    border-radius: 999px;
+    background: rgba($white, 0.18);
+    transition: background-color 0.2s ease;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: $white;
+      transition: transform 0.2s $ease-quint;
+    }
+  }
+
+  input:checked + &__track { background: $accent; }
+  input:checked + &__track::after { transform: translateX(20px); background: $ink; }
+  input:focus-visible + &__track { outline: 2px solid $accent; outline-offset: 2px; }
+}
+
+.prefs-calibrate {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  .is-done { border-color: $accent; color: $white; }
+  .is-done::before { content: "\2713"; color: $accent; }
+}
+
+// Save / Reset
+.prefs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 18px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid $line;
+}
+
+.prefs-status {
+  margin: 0;
+  color: $accent;
+  font-size: 14px;
+
+  &:empty { display: none; }
+  &.is-error { color: #ff9b9b; }
+}
+
+// The head-tracking pointer (js/head-tracking.js), on every page while it runs
+.head-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $accent;
+  border-radius: 50%;
+  background: rgba($accent, 0.18);
+  box-shadow: 0 0 12px rgba($accent, 0.6);
+  pointer-events: none;
+  transform: translate(-9999px, -9999px);
+
+  &[hidden] { display: none; }
+
+  &__video { position: fixed; left: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+}
+
+// Google Translate (Language preference): keep its toolbar and hover pop-ups off the page
+body > .skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-balloon-frame { display: none !important; }
+body { top: 0 !important; }
+.goog-text-highlight { background: none !important; box-shadow: none !important; }

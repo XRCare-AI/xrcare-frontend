@@ -1,7 +1,7 @@
 // Backend address (same structure as Open Coding Society pages assets/js/api/config.js)
 // Locally: run `make` in the xrcare-backend repo (port 8620).
 // Deployed: set deployedPythonURI to the backend's HTTPS address once it is hosted.
-const deployedPythonURI = "";
+const deployedPythonURI = "https://xrcare-api.opencodingsociety.com";
 
 export var pythonURI;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {

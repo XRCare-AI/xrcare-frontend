@@ -21,6 +21,7 @@
 @use "pages/flow";       // Explore, About Us, Contact, an article, 404
 @use "pages/pathway";    // Guided XRCare discovery path
 @use "pages/hub";        // My Hub (/account/)
+@use "pages/preferences"; // Preferences (/account/preferences/), head-tracking pointer, Google Translate
 @use "pages/auth";       // Log in / Sign up
 @use "pages/survey";     // first-login survey
 @use "components/ocs-grammar"; // Shared OCS button, grid and surface grammar

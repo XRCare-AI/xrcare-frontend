@@ -1,5 +1,5 @@
 import { getSite, siteURL, setting, el } from './site.js';
-import { currentUser, showAccount, setUpAccountMenu } from './account.js';
+import { currentUser, showAccount, setUpAccountMenu, backendUnreachable } from './account.js';
 
 // Every page: fill the header, slide-out menu, footer and any [data-site-*] element from the API settings and menu,
 // show Log in / Get Started or the account menu, and run the phone/tablet slide-out menu.
@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     setUpMenu();
     setUpHeaderScroll();
     setUpAccountMenu();
-    currentUser().then(showAccount);
+    currentUser().then(user => {
+        showAccount(user);
+        applyPreferences(user);
+    });
     try {
         const { settings, nav } = await getSite();
         fillSettings(settings);
@@ -21,6 +24,19 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
     document.body.classList.remove("is-loading");
 });
+
+// The user's saved preferences (theme, text size, language, voice, head tracking) from the backend. js/theme.js has
+// already painted this browser's last copy; this corrects it, or clears it when nobody is logged in.
+function applyPreferences(user) {
+    // The backend didn't answer (not running / not connected): keep the copy rather than flash back to default
+    if (!user && backendUnreachable()) return;
+    const prefs = user?.preferences || null;
+    window.XRCareTheme?.sync(prefs);
+    // Head tracking runs on every page except Preferences, which has its own controls for it
+    if (prefs?.headTracking?.enabled && !document.querySelector("[data-preferences]")) {
+        import('./head-tracking.js').then(tracking => tracking.start(prefs.headTracking)).catch(error => console.log(error));
+    }
+}
 
 // data-site-text="blog.read_more" etc. name a setting by its (dotted) key
 function fillSettings(settings) {

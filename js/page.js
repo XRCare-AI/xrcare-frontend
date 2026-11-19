@@ -104,10 +104,13 @@ function copilotGraphic(c) {
         ...nodes);
 }
 
-// Keep every capability readable at once; no icon-only controls or automatic content rotation.
+// Capability explorer: icons on a ring with the chosen one's description beside them. Once the explorer is scrolled
+// into view, a line draws itself around the active icon; when it closes, the next capability is shown. Clicking an
+// icon shows that one and stops the timer for good; hovering pauses it.
 function capabilityExplorer(c) {
     return el("div", { class: "capabilities__grid ocs__grid ocs__grid--card cols-3" }, ...(c.items || []).map((item, i) =>
         el("article", { class: "capability-card ocs__grid-cell" },
+            item.image ? el("img", { class: "capability-card__image", src: assetURL(item.image), alt: item.image_alt || "", loading: "lazy" }) : null,
             el("span", { class: "capability-card__icon", "aria-hidden": "true" }, icon(item.icon)),
             el("span", { class: "capability-card__number", "aria-hidden": "true" }, pad(i + 1)),
             el("h3", {}, item.title),

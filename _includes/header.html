@@ -20,7 +20,7 @@
         <a class="ocs__btn accent fill small" href="{{ '/signup/' | relative_url }}" data-site-text="account.sign_up"></a>
       </div>
       <!-- Logged in: the chip opens the user's hub. Hovering (or tabbing into) it grows the same box downward
-           to show My Hub and Log out. -->
+           to show My Hub, Preferences and Log out. -->
       <div class="account-menu" data-when="user" hidden>
         <div class="account-menu__box">
           <a class="ocs__btn pill account-chip" href="{{ '/account/' | relative_url }}">
@@ -32,6 +32,9 @@
           <div class="account-menu__items"><div>
             <a class="ocs__btn account-menu__item" href="{{ '/account/' | relative_url }}">
               <i class="fa-solid fa-house-user" aria-hidden="true"></i><span data-site-text="account.my_hub"></span>
+            </a>
+            <a class="ocs__btn account-menu__item" href="{{ '/account/preferences/' | relative_url }}">
+              <i class="fa-solid fa-sliders" aria-hidden="true"></i><span data-site-text="account.preferences"></span>
             </a>
             <button type="button" class="ocs__btn account-menu__item" data-action="log-out">
               <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span data-site-text="account.log_out"></span>

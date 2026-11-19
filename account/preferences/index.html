@@ -1,0 +1,222 @@
+---
+body_class: is-flow is-hub
+header: transparent
+title_setting: account.preferences
+scripts:
+  - /js/preferences.js
+---
+<!-- Preferences (/account/preferences/), opened from the account menu in the top right. Laid out like Open Coding
+     Society's dashboard Preferences tab: Appearance (pick a starting point, fine-tune, live preview),
+     Language & voice, and Head tracking. Saved to the user's profile on the backend (PUT /api/user/preferences);
+     js/theme.js applies them on every page. Logged-out visitors go to Log in (js/preferences.js). -->
+<div class="hub prefs" data-preferences hidden>
+  <div class="pagehead__glow" aria-hidden="true"></div>
+  <div class="container">
+    <header class="prefs__head">
+      <a class="prefs__back" href="{{ '/account/' | relative_url }}"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i><span data-site-text="account.my_hub">My Hub</span></a>
+      <h1 class="hub__greeting">Preferences</h1>
+      <p class="hub__since">Choose how XRCare looks, reads and sounds for you. Your choices are saved to your account and follow you to any device.</p>
+    </header>
+
+    <!-- Top tabs: one panel each -->
+    <div class="prefs-tabs" role="tablist" aria-label="Preferences">
+      <button type="button" role="tab" class="prefs-tabs__tab" id="prefs-tab-appearance" aria-controls="prefs-panel-appearance" aria-selected="true"><i class="fa-solid fa-palette" aria-hidden="true"></i>Appearance</button>
+      <button type="button" role="tab" class="prefs-tabs__tab" id="prefs-tab-voice" aria-controls="prefs-panel-voice" aria-selected="false" tabindex="-1"><i class="fa-solid fa-language" aria-hidden="true"></i>Language &amp; voice</button>
+      <button type="button" role="tab" class="prefs-tabs__tab" id="prefs-tab-tracking" aria-controls="prefs-panel-tracking" aria-selected="false" tabindex="-1"><i class="fa-solid fa-person-rays" aria-hidden="true"></i>Head tracking</button>
+    </div>
+
+    <form class="prefs__form" data-prefs-form novalidate>
+
+      <!-- ===== Appearance ===== -->
+      <section class="prefs-panel" id="prefs-panel-appearance" role="tabpanel" aria-labelledby="prefs-tab-appearance">
+        <div class="prefs-layout">
+          <div class="prefs-main">
+
+            <!-- Step 1: pick a starting point -->
+            <section class="hub-box prefs-card">
+              <div class="prefs-step">
+                <span class="prefs-step__num" aria-hidden="true">1</span>
+                <h2 class="hub-card__title">Pick a starting point</h2>
+              </div>
+
+              <div class="prefs-segments" role="tablist" aria-label="Theme source">
+                <button type="button" role="tab" class="prefs-segments__btn" data-source="presets" aria-selected="true">Presets</button>
+                <button type="button" role="tab" class="prefs-segments__btn" data-source="mine" aria-selected="false" tabindex="-1">My themes</button>
+                <button type="button" role="tab" class="prefs-segments__btn" data-source="ai" aria-selected="false" tabindex="-1">Create with AI <span class="prefs-badge">New</span></button>
+              </div>
+
+              <div data-source-pane="presets">
+                <p class="prefs-hint">Picking a theme fills step 2 and the preview. Nothing changes on the site until you save.</p>
+                <div class="prefs-swatches" data-presets></div>
+              </div>
+
+              <div data-source-pane="mine" hidden>
+                <p class="prefs-hint">Keep the look in step 2 as one of your themes (up to 10).</p>
+                <div class="prefs-inline">
+                  <input class="prefs-input" id="prefs-theme-name" maxlength="30" placeholder="Theme name" aria-label="Theme name" autocomplete="off">
+                  <button type="button" class="pill-button pill-button--small" data-add-theme>Add to my themes</button>
+                </div>
+                <div class="prefs-swatches" data-custom-themes></div>
+                <p class="prefs-empty" data-custom-empty>You haven't saved any themes yet.</p>
+              </div>
+
+              <div data-source-pane="ai" hidden>
+                <p class="prefs-hint">Describe a look and AI designs a theme for it. Readability is checked before it's shown.</p>
+                <div class="prefs-inline">
+                  <input class="prefs-input" id="prefs-ai-prompt" maxlength="200" placeholder="e.g. calm ocean, warm and cozy, high contrast" aria-label="Describe a theme" autocomplete="off">
+                  <button type="button" class="pill-button pill-button--small" data-ai-generate><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Generate</button>
+                </div>
+                <div class="prefs-chips" data-ai-chips></div>
+                <p class="prefs-status" data-ai-status role="status" aria-live="polite"></p>
+                <div class="prefs-ai-result" data-ai-result hidden>
+                  <span class="prefs-ai-result__swatch" data-ai-swatch aria-hidden="true"></span>
+                  <div>
+                    <h3 class="prefs-ai-result__title" data-ai-title></h3>
+                    <p class="prefs-ai-result__text" data-ai-description></p>
+                    <div class="prefs-inline">
+                      <button type="button" class="pill-button pill-button--small" data-ai-use>Use this theme</button>
+                      <button type="button" class="hub__edit" data-ai-keep><i class="fa-solid fa-plus" aria-hidden="true"></i>Add to my themes</button>
+                      <button type="button" class="hub__edit" data-ai-again><i class="fa-solid fa-rotate" aria-hidden="true"></i>Regenerate</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Step 2: fine-tune -->
+            <section class="hub-box prefs-card">
+              <div class="prefs-step">
+                <span class="prefs-step__num" aria-hidden="true">2</span>
+                <h2 class="hub-card__title">Fine-tune</h2>
+              </div>
+
+              <p class="prefs-label">Colors</p>
+              <div class="prefs-colors">
+                <label class="prefs-color" for="pref-bg">Background
+                  <span class="prefs-color__field"><input type="color" id="pref-bg" name="bg"><code data-hex-for="pref-bg"></code></span>
+                </label>
+                <label class="prefs-color" for="pref-text">Text
+                  <span class="prefs-color__field"><input type="color" id="pref-text" name="text"><code data-hex-for="pref-text"></code></span>
+                </label>
+                <label class="prefs-color" for="pref-accent">Accent
+                  <span class="prefs-color__field"><input type="color" id="pref-accent" name="accent"><code data-hex-for="pref-accent"></code></span>
+                </label>
+                <label class="prefs-color" for="pref-selection">Selected text
+                  <span class="prefs-color__field"><input type="color" id="pref-selection" name="selectionColor"><code data-hex-for="pref-selection"></code></span>
+                </label>
+              </div>
+
+              <p class="prefs-label">Text and buttons</p>
+              <div class="prefs-fields">
+                <label class="prefs-field" for="pref-font">Font
+                  <select class="prefs-input" id="pref-font" name="font" data-font-options></select>
+                </label>
+                <label class="prefs-field" for="pref-button-style">Button style
+                  <select class="prefs-input" id="pref-button-style" name="buttonStyle" data-button-options></select>
+                </label>
+                <label class="prefs-field prefs-field--wide" for="pref-size"><span>Text size: <span data-size-label></span></span>
+                  <input type="range" class="prefs-range" id="pref-size" name="size" min="14" max="24" step="1">
+                </label>
+              </div>
+            </section>
+          </div>
+
+          <!-- Live preview and readability checks -->
+          <aside class="hub-box prefs-card prefs-preview-card">
+            <h2 class="hub-card__title">Live preview</h2>
+            <div class="prefs-preview" data-preview>
+              <div class="prefs-preview__bar" data-preview-bar></div>
+              <div class="prefs-preview__body">
+                <h3 data-preview-heading>Spatial AI Nurse Co-Pilot</h3>
+                <p data-preview-text>The AI suggests; the nurse decides. <span data-preview-selection>Selected text</span> looks like this, and <a href="#" data-preview-link tabindex="-1">links</a> like this.</p>
+                <div class="prefs-preview__buttons">
+                  <span class="prefs-preview__button" data-preview-button>Get Started</span>
+                  <span class="prefs-preview__button prefs-preview__button--ghost" data-preview-ghost>Learn more</span>
+                </div>
+              </div>
+            </div>
+            <ul class="prefs-checks">
+              <li><span>Text on background</span><strong data-check-text></strong></li>
+              <li><span>Accent on background</span><strong data-check-accent></strong></li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <!-- ===== Language & voice ===== -->
+      <section class="prefs-panel" id="prefs-panel-voice" role="tabpanel" aria-labelledby="prefs-tab-voice" hidden>
+        <div class="prefs-two">
+          <section class="hub-box prefs-card">
+            <h2 class="hub-card__title"><i class="fa-solid fa-globe" aria-hidden="true"></i> Language</h2>
+            <label class="prefs-field" for="pref-language">Site language
+              <select class="prefs-input" id="pref-language" name="language" data-language-options></select>
+            </label>
+            <p class="prefs-hint">Translation powered by Google Translate. Switching back to English reloads the page.</p>
+          </section>
+
+          <section class="hub-box prefs-card">
+            <div class="hub__section-head">
+              <h2 class="hub-card__title"><i class="fa-solid fa-volume-high" aria-hidden="true"></i> Text-to-speech</h2>
+              <button type="button" class="hub__edit" data-tts-test><i class="fa-solid fa-play" aria-hidden="true"></i>Test voice</button>
+            </div>
+            <div class="prefs-fields">
+              <label class="prefs-field prefs-field--wide" for="pref-tts-voice">Voice
+                <select class="prefs-input" id="pref-tts-voice" name="ttsVoice" data-voice-options><option value="">Browser default</option></select>
+              </label>
+              <label class="prefs-field" for="pref-tts-rate"><span>Speed: <span data-label-for="pref-tts-rate"></span>x</span>
+                <input type="range" class="prefs-range" id="pref-tts-rate" name="ttsRate" min="0.5" max="2" step="0.1">
+              </label>
+              <label class="prefs-field" for="pref-tts-pitch"><span>Pitch: <span data-label-for="pref-tts-pitch"></span></span>
+                <input type="range" class="prefs-range" id="pref-tts-pitch" name="ttsPitch" min="0.5" max="2" step="0.1">
+              </label>
+              <label class="prefs-field" for="pref-tts-volume"><span>Volume: <span data-label-for="pref-tts-volume"></span>%</span>
+                <input type="range" class="prefs-range" id="pref-tts-volume" name="ttsVolume" min="0" max="1" step="0.1">
+              </label>
+              <label class="prefs-field prefs-field--wide" for="prefs-tts-text">Test text
+                <input class="prefs-input" id="prefs-tts-text" value="Hello! This is how XRCare will read to you." autocomplete="off">
+              </label>
+            </div>
+            <p class="prefs-hint">Uses your browser's built-in voices, which depend on your device. On any page, select text and press <kbd>Alt</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> to hear it read aloud (press again to stop).</p>
+            <p class="prefs-hint" data-tts-unsupported hidden>This browser can't read text aloud.</p>
+          </section>
+        </div>
+      </section>
+
+      <!-- ===== Head tracking ===== -->
+      <section class="prefs-panel" id="prefs-panel-tracking" role="tabpanel" aria-labelledby="prefs-tab-tracking" hidden>
+        <section class="hub-box prefs-card prefs-tracking">
+          <h2 class="hub-card__title"><i class="fa-solid fa-person-rays" aria-hidden="true"></i> Head tracking cursor</h2>
+          <label class="prefs-switch" for="pref-tracking-enabled">
+            <input type="checkbox" id="pref-tracking-enabled" name="headTracking.enabled">
+            <span class="prefs-switch__track" aria-hidden="true"></span>
+            Move an on-screen pointer with your head
+          </label>
+          <p class="prefs-hint">Uses your webcam and MediaPipe face tracking, in the same way as Open Coding Society's
+            <a href="https://aadibhat09.github.io/NodCursor/" target="_blank" rel="noopener noreferrer">NodCursor</a>.
+            Video stays on your device; only your calibration numbers are saved.</p>
+          <label class="prefs-field" for="pref-tracking-sensitivity"><span>Smoothness: <span data-label-for="pref-tracking-sensitivity"></span></span>
+            <input type="range" class="prefs-range" id="pref-tracking-sensitivity" name="headTracking.sensitivity" min="0.1" max="0.9" step="0.05">
+          </label>
+          <p class="prefs-label">Calibration</p>
+          <p class="prefs-hint">Turn tracking on, then look at each spot and press its button: center, then the far left, right, top and bottom of your screen.</p>
+          <div class="prefs-calibrate" data-calibrate>
+            <button type="button" class="hub__edit" data-point="center">Capture center</button>
+            <button type="button" class="hub__edit" data-point="left">Capture left</button>
+            <button type="button" class="hub__edit" data-point="right">Capture right</button>
+            <button type="button" class="hub__edit" data-point="up">Capture top</button>
+            <button type="button" class="hub__edit" data-point="down">Capture bottom</button>
+            <button type="button" class="hub__cancel" data-calibration-reset>Reset calibration</button>
+          </div>
+          <p class="prefs-status" data-tracking-status role="status" aria-live="polite"></p>
+        </section>
+      </section>
+
+      <!-- Save / Reset for every tab (one set of preferences) -->
+      <div class="prefs-actions">
+        <button type="submit" class="pill-button" data-save>Save preferences</button>
+        <button type="button" class="hub__cancel" data-reset><i class="fa-solid fa-rotate-left" aria-hidden="true"></i>Reset to site default</button>
+        <p class="prefs-status" data-save-status role="status" aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</div>

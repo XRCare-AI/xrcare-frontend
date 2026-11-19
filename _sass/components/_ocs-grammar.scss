@@ -2,11 +2,11 @@
 // Rewritten for this site's Sass system; see OCS-NOTICE.md and LICENSE-OCS for attribution.
 // Theme values stay in CSS variables so surfaces remain easy to tune together.
 :root {
-  --pref-bg-color: #0b1220;
-  --pref-text-color: #e6eef8;
+  --pref-bg-color: #050a18;
+  --pref-text-color: #ffffff;
   --pref-font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   --pref-font-size: 14px;
-  --pref-accent-color: #3b82f6;
+  --pref-accent-color: #17ddfc;
   --pref-success-color: #22c55e;
   --text-muted: #a0a0a0;
   --panel: var(--pref-bg-color);
