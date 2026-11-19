@@ -10,14 +10,30 @@ To change what the site says, edit `_data/`:
 - `_data/pages/<page>.yml`: a page's sections, in order (`home`, `about-us`, `explore`, `contact`)
 
 ## Run locally
-```bash
-# 1. Backend (in the xrcare-backend repo): API on http://localhost:8620
-make
 
-# 2. Frontend (this repo): http://localhost:4100
-make            # bundle install + jekyll serve
-make stop       # stops it
+Run the frontend and backend in two terminal windows from the Xcare workspace. The backend is optional for public pages;
+login, sign-up, My Hub, survey answers, articles, contact submissions and the chatbot need it.
+
+**Terminal 1 — API**
+```bash
+cd backend
+make
 ```
+The first run creates `.venv` and installs the Python requirements. The API serves at <http://localhost:8620>.
+
+**Terminal 2 — website**
+```bash
+cd frontend
+make
+```
+The first run installs the Ruby gems; Jekyll serves the site at <http://localhost:4100>.
+
+Open <http://localhost:4100> in your browser. To stop either process, press `Ctrl+C` if it is running in the foreground,
+or run `make stop` in that component's directory. To build the static site without starting a server, run `make build`
+from `frontend/`.
+
+You need Python 3, Ruby, Bundler, and GNU Make. `make` is the command that reads each component's Makefile and runs
+its default target (`serve`); the frontend and API each have their own Makefile.
 
 ## Pages
 | Address | Page | Content from |
@@ -25,6 +41,7 @@ make stop       # stops it
 | `/` | Home: name and slogan over the photo reel, buttons to the main pages, the co-pilot graphic, features | `_data/pages/home.yml` |
 | `/about-us/` | About Us: intro, Vision/Mission, founder's quote, team cards with bios | `_data/pages/about-us.yml` |
 | `/explore/` | Explore hub: Clinical Teams, Care Team Training, Pharmacy and the Articles (search + category filter), with a sticky row of links | `_data/pages/explore.yml`; articles: `GET /api/articles` |
+| `/pathway/` | Guided tour of the product, care settings, dedicated features and resources | `_data/pages/pathway.yml` |
 | `/articles/post/?slug=<slug>` | One article | `GET /api/articles/<slug>` |
 | `/contact/` | Contact: "Ready to Transform Your Care Team?", contact details and the contact form (the only page with them) | `_data/pages/contact.yml`; form: `/api/contact` |
 | `/login/` | Log in; the first log in goes on to `/welcome/`, later ones to `/account/` | `POST /api/authenticate` |
@@ -46,7 +63,7 @@ make stop       # stops it
 - `js/site.js`: reads the built-in content (`getSite()`, `getPage()`), plus helpers (element builder, safe HTML for bios and articles, dates, base path).
 - `js/main.js`: fills the header, menu, footer and any `data-site-*` element from `_data/site.yml` (an element keeps its own text if a key is missing), and runs the slide-out menu.
 - `js/account.js`: who is logged in (`GET /api/id`), log out, where to go after logging in, and turning "Get Started" links into "My Hub" for logged-in users.
-- `js/page.js`: draws a page's sections by `layout` (`spotlight`, `copilot`, `capabilities`, `pillars`, `audiences`, `cta`, `pagehead`, `subnav`, `audience`, `articles`, `about`, `team`) and fades them in.
+- `js/page.js`: draws a page's sections by `layout` (`spotlight`, `copilot`, `capabilities`, `pillars`, `audiences`, `pathway`, `cta`, `pagehead`, `subnav`, `audience`, `articles`, `about`, `team`) and fades them in.
 - `js/article.js`: one article with Previous/Next Post and Share.
 - `js/hub.js`: My Hub.
 - `js/contact.js`: builds the contact form from `/api/contact/form` and sends it to `/api/contact`.
@@ -59,7 +76,16 @@ make stop       # stops it
   - `base/`: reset, typography, container
   - `layout/`: header, slide-out menu, footer and contact panel
   - `components/`: pill buttons, contact form, chat bubble
-  - `pages/`: home (plus what every dark page shares), flow (Explore, About Us, Contact, an article, 404), hub, log in / sign up, survey
+  - `pages/`: home and shared dark-page styles, flow (Explore, About Us, Contact, an article, 404), pathway, hub, log in / sign up, survey
+
+## Open Coding Society pattern adaptation
+
+The `/pathway/` page uses the public CS Pathway's guided discovery pattern: a clear starting point, progressive steps,
+and scannable destination cards. XRCare's Spatial AI, co-pilot, training and pharmacy descriptions remain XRCare content
+in their existing sections. This implementation does not copy OCS source code, wording, marks, or assets; it adds no
+completion tracking or locked access. The journey is navigation only, and the page adds no collection of patient data.
+This describes the scope of the UI adaptation; it is not a legal, clinical, security, or regulatory certification of
+the wider product.
 
 ## Deploying
 `.github/workflows/jekyll-gh-pages.yml` builds and publishes the site to GitHub Pages on every push to `main`, passing the Pages path (`/xrcare-frontend`) as `--baseurl` so every link, stylesheet, script and image works there; locally `baseurl` stays `""`. Once the backend is hosted, set `deployedPythonURI` in `js/api/config.js` and add the frontend's address to the backend's CORS list (`ALLOWED_ORIGINS` in its `.env`).
