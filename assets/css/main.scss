@@ -23,3 +23,4 @@
 @use "pages/hub";        // My Hub (/account/)
 @use "pages/auth";       // Log in / Sign up
 @use "pages/survey";     // first-login survey
+@use "components/ocs-grammar"; // Shared OCS button, grid and surface grammar

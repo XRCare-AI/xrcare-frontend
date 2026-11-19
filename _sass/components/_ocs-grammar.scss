@@ -1,0 +1,216 @@
+// XRCare implementation of the OCS button, container, and grid grammar.
+// Theme values stay in CSS variables so surfaces remain easy to tune together.
+:root {
+  --pref-bg-color: #0b1220;
+  --pref-text-color: #e6eef8;
+  --pref-font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --pref-font-size: 14px;
+  --pref-accent-color: #3b82f6;
+  --pref-success-color: #22c55e;
+  --text-muted: #a0a0a0;
+  --panel: var(--pref-bg-color);
+  --panel-mid: color-mix(in srgb, var(--pref-text-color) 7%, var(--pref-bg-color));
+  --ui-bg: color-mix(in srgb, var(--pref-text-color) 4%, var(--pref-bg-color));
+  --ui-border: color-mix(in srgb, var(--pref-text-color) 10%, transparent);
+  --navbar-surface: var(--pref-bg-color);
+  --navbar-border: var(--ui-border);
+  --navbar-shadow: color-mix(in srgb, var(--pref-text-color) 14%, transparent);
+  --navbar-muted: var(--text-muted);
+}
+
+body {
+  background-color: var(--pref-bg-color);
+  color: var(--pref-text-color);
+  font-family: var(--pref-font-family);
+  font-size: var(--pref-font-size);
+}
+
+a { color: var(--pref-accent-color); }
+
+.ocs__container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 24px;
+  color: var(--pref-text-color);
+  font-family: var(--pref-font-family);
+}
+
+.ocs__card {
+  padding: 16px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--pref-text-color);
+}
+
+.ocs__section-title {
+  margin: 0 0 12px;
+  color: var(--pref-text-color);
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.ocs__description {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.ocs__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+.ocs__btn,
+.pill-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--pref-accent-color);
+  border-radius: 6px;
+  background: var(--pref-bg-color);
+  color: var(--pref-accent-color);
+  font-family: var(--pref-font-family);
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--pref-accent-color);
+    background: var(--panel-mid);
+    color: var(--pref-text-color);
+    transform: scale(1.03);
+  }
+
+  &:focus-visible { outline: 2px solid var(--pref-accent-color); outline-offset: 2px; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  &.accent,
+  &.accent.fill {
+    background: color-mix(in srgb, var(--pref-accent-color) 20%, var(--pref-bg-color));
+    color: var(--pref-text-color);
+  }
+
+  &.accent.fill:hover,
+  &.pill-button:not(.pill-button--ghost):hover {
+    background: color-mix(in srgb, var(--pref-accent-color) 30%, var(--pref-bg-color));
+  }
+
+  &.pill,
+  &.pill-button--ghost { border-radius: 999px; }
+  &.small,
+  &.pill-button--small { min-height: 28px; padding: 4px 10px; font-size: 13px; line-height: 20px; }
+  &.medium { min-height: 35px; padding: 7px 14px; border-radius: 12px; }
+  &.large { min-height: 50px; padding: 14px 20px; border-radius: 12px; font-size: 17px; line-height: 22px; }
+  &.pill-button--block { width: 100%; }
+}
+
+.pill-button--ghost {
+  background: var(--pref-bg-color) !important;
+  color: var(--pref-accent-color) !important;
+  box-shadow: none !important;
+
+  &:hover { background: var(--panel-mid) !important; color: var(--pref-text-color) !important; }
+}
+
+.pill-button:not(.pill-button--ghost) {
+  background: color-mix(in srgb, var(--pref-accent-color) 20%, var(--pref-bg-color));
+  color: var(--pref-text-color);
+
+  &:hover { background: color-mix(in srgb, var(--pref-accent-color) 30%, var(--pref-bg-color)); }
+}
+
+.ocs__btn.pill:not(.accent) {
+  border-color: var(--ui-border);
+  background: var(--ui-bg);
+  color: var(--pref-accent-color);
+}
+
+.ocs__grid { width: 100%; }
+
+.ocs__grid-cell {
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid var(--ui-border);
+  border-radius: 8px;
+  background: var(--panel);
+  color: var(--pref-text-color);
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+  &--header {
+    grid-column: 1 / -1;
+    padding: 8px 16px;
+    border-color: var(--pref-accent-color);
+    background: color-mix(in srgb, var(--pref-accent-color) 12%, var(--panel));
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+
+  &--wide { grid-column: span 2; }
+  &--accent {
+    border-color: var(--pref-accent-color);
+    background: color-mix(in srgb, var(--pref-accent-color) 15%, var(--panel));
+  }
+  &--muted { background: color-mix(in srgb, var(--pref-text-color) 4%, var(--panel)); color: var(--text-muted); }
+}
+
+.ocs__grid--standard {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+
+  &.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  &.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ocs__grid-cell { cursor: pointer; }
+  .ocs__grid-cell:hover { background: var(--panel-mid); border-color: var(--pref-accent-color); transform: translateY(-2px); }
+}
+
+.ocs__grid--card {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+
+  &.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  &.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  &.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .ocs__grid-cell:hover { background: var(--panel-mid); border-color: var(--pref-accent-color); transform: translateY(-2px); }
+}
+
+.ocs__status-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 9px;
+  border: 1px solid var(--ui-border);
+  border-radius: 999px;
+  background: var(--ui-bg);
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@media (max-width: 900px) {
+  .ocs__grid--card.cols-4,
+  .ocs__grid--standard.cols-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 690px) {
+  .ocs__grid--standard,
+  .ocs__grid--standard.cols-2,
+  .ocs__grid--standard.cols-4,
+  .ocs__grid--card.cols-3,
+  .ocs__grid--card.cols-4 { grid-template-columns: 1fr; }
+  .ocs__grid-cell--wide { grid-column: auto; }
+  .ocs__container { padding: 16px; }
+}
