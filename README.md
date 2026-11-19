@@ -80,12 +80,14 @@ its default target (`serve`); the frontend and API each have their own Makefile.
 
 ## Open Coding Society pattern adaptation
 
-The `/pathway/` page uses the public CS Pathway's guided discovery pattern: a clear starting point, progressive steps,
-and scannable destination cards. XRCare's Spatial AI, co-pilot, training and pharmacy descriptions remain XRCare content
-in their existing sections. This implementation does not copy OCS source code, wording, marks, or assets; it adds no
-completion tracking or locked access. The journey is navigation only, and the page adds no collection of patient data.
-This describes the scope of the UI adaptation; it is not a legal, clinical, security, or regulatory certification of
-the wider product.
+The shared SaaS UI follows OCS's public button, card, grid, and theme-token grammar across navigation, My Hub, login,
+sign-up, survey, articles, and product pages. The `/pathway/` page also uses its guided discovery pattern: a clear
+starting point, progressive steps, and scannable destination cards. XRCare's Spatial AI, co-pilot, training, and pharmacy
+descriptions remain XRCare content in their existing sections. The Sass implementation is rewritten for this site's
+existing Jekyll architecture; it uses no OCS logo, imagery, or page copy and adds no completion tracking or locked access.
+The journey is navigation only and collects no patient data. Attribution and the Apache 2.0 license are in
+[`OCS-NOTICE.md`](OCS-NOTICE.md) and [`LICENSE-OCS`](LICENSE-OCS). This describes the scope of the UI adaptation; it is
+not a legal, clinical, security, or regulatory certification of the wider product.
 
 ## Deploying
 `.github/workflows/jekyll-gh-pages.yml` builds and publishes the site to GitHub Pages on every push to `main`, passing the Pages path (`/xrcare-frontend`) as `--baseurl` so every link, stylesheet, script and image works there; locally `baseurl` stays `""`. Once the backend is hosted, set `deployedPythonURI` in `js/api/config.js` and add the frontend's address to the backend's CORS list (`ALLOWED_ORIGINS` in its `.env`).

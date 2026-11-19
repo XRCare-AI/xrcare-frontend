@@ -1,4 +1,5 @@
-// XRCare implementation of the OCS button, container, and grid grammar.
+// Changed XRCare implementation of the public OCS button, container, and grid grammar.
+// Rewritten for this site's Sass system; see OCS-NOTICE.md and LICENSE-OCS for attribution.
 // Theme values stay in CSS variables so surfaces remain easy to tune together.
 :root {
   --pref-bg-color: #0b1220;
