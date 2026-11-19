@@ -1,0 +1,64 @@
+# The guided, public XRCare tour. This borrows the progressive pathway pattern
+# from Open Coding Society while keeping XRCare's clinical product content intact.
+title: Your XRCare Learning Path
+sections:
+- slug: start
+  name: Start here
+  layout: pagehead
+  theme: dark
+  content:
+    title: A guided path through XRCare
+    highlight: XRCare
+    text: >-
+      Start with the co-pilot, choose the care setting that fits your team, then explore the specialized tools and
+      resources that support your work.
+- slug: journey
+  name: Learning path
+  layout: pathway
+  theme: dark
+  content:
+    eyebrow: YOUR LEARNING PATH
+    heading: Explore at your pace
+    text: Each stop stands on its own. Begin with the overview or jump to the area most useful to your team.
+    steps:
+    - number: '01'
+      label: Start here
+      title: Understand the co-pilot
+      text: See how smart glasses and Spatial AI support a nurse during a care workflow.
+      icon: fa-solid fa-glasses
+      url: /#nurse-copilot
+      action: Meet the co-pilot
+    - number: '02'
+      label: Choose a care setting
+      title: Find your solution
+      text: Browse point-of-care guidance, collaborative team training, and pharmacy workflows.
+      icon: fa-solid fa-compass
+      url: /explore/
+      action: Explore solutions
+    - number: '03'
+      label: Go deeper
+      title: Explore XRCare features
+      text: See the dedicated capabilities behind context-aware guidance, multimodal insight, and human-led decisions.
+      icon: fa-solid fa-layer-group
+      url: /#features
+      action: View features
+    - number: '04'
+      label: Keep learning
+      title: Read, discuss, or connect
+      text: Browse articles or talk with the XRCare team about your care setting.
+      icon: fa-solid fa-book-open
+      url: /explore/#articles
+      action: Browse articles
+- slug: next-step
+  name: Talk to XRCare
+  layout: cta
+  theme: light
+  content:
+    heading: Ready to plan your next step?
+    text: Share your care setting and goals with the XRCare team.
+    primary:
+      label: Contact XRCare
+      url: /contact/
+    secondary:
+      label: Back to the product
+      url: /
