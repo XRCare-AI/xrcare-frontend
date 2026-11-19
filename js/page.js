@@ -54,10 +54,10 @@ const pad = n => String(n).padStart(2, "0");
 // Delay for the n-th item fading in
 const stagger = (i, step = 120) => ({ "--delay": `${i * step}ms` });
 
-// A link styled as a pill button; secondary ones are outlined
+// A link using the shared OCS button grammar.
 function action(link, ghost) {
     if (!link) return null;
-    return el("a", { class: `pill-button${ghost ? " pill-button--ghost" : ""}`, href: siteURL(link.url) },
+    return el("a", { class: `ocs__btn pill${ghost ? " accent" : " accent fill"}`, href: siteURL(link.url) },
         link.label, ghost ? null : icon("fa-solid fa-arrow-right"));
 }
 
@@ -106,8 +106,8 @@ function copilotGraphic(c) {
 
 // Keep every capability readable at once; no icon-only controls or automatic content rotation.
 function capabilityExplorer(c) {
-    return el("div", { class: "capabilities__grid" }, ...(c.items || []).map((item, i) =>
-        el("article", { class: "capability-card" },
+    return el("div", { class: "capabilities__grid ocs__grid ocs__grid--card cols-3" }, ...(c.items || []).map((item, i) =>
+        el("article", { class: "capability-card ocs__grid-cell" },
             el("span", { class: "capability-card__icon", "aria-hidden": "true" }, icon(item.icon)),
             el("span", { class: "capability-card__number", "aria-hidden": "true" }, pad(i + 1)),
             el("h3", {}, item.title),
@@ -116,7 +116,7 @@ function capabilityExplorer(c) {
 
 // Sticky row of links to the sections below; the one in view is highlighted
 function subnav(c) {
-    const links = (c.links || []).map(link => el("a", { class: "subnav__link", href: siteURL(link.url) },
+    const links = (c.links || []).map(link => el("a", { class: "ocs__btn pill subnav__link", href: siteURL(link.url) },
         link.icon ? icon(link.icon) : null, link.label));
     requestAnimationFrame(() => {
         const targets = links.map(a => document.getElementById(decodeURIComponent(a.hash.slice(1)))).filter(Boolean);
@@ -164,8 +164,8 @@ const LAYOUTS = {
                     el("h1", { class: "spotlight__title reveal" }, c.title),
                     el("p", { class: "spotlight__slogan reveal", style: stagger(1) }, ...highlighted(c.slogan, c.highlight)),
                     c.badge ? el("img", { class: "spotlight__badge reveal", style: stagger(2), src: assetURL(c.badge.image), alt: c.badge.alt || "" }) : null),
-                el("nav", { class: "spotlight__links", "aria-label": "Start here" }, ...(c.links || []).map((link, i) =>
-                    el("a", { class: "hero-link reveal", href: siteURL(link.url), style: stagger(i + 1) },
+                el("nav", { class: "ocs__links ocs__links--wide spotlight__links", "aria-label": "Start here" }, ...(c.links || []).map((link, i) =>
+                    el("a", { class: "ocs__btn accent fill large hero-link reveal", href: siteURL(link.url), style: stagger(i + 1) },
                         el("span", { class: "hero-link__icon" }, icon(link.icon)),
                         el("span", { class: "hero-link__label" }, link.label),
                         icon("fa-solid fa-arrow-right hero-link__arrow"))))),
@@ -190,50 +190,14 @@ const LAYOUTS = {
     // right both over the top and under the bottom, meeting at the right edge; a short line then crosses the gap
     // to the next card. It starts once most of the cards are on screen, not when the section first peeks in.
     pillars(c) {
-        const ns = "http://www.w3.org/2000/svg";
-        const trace = card => {
-            const svg = document.createElementNS(ns, "svg");
-            svg.setAttribute("class", "pillar__trace");
-            svg.setAttribute("aria-hidden", "true");
-            const paths = ["over", "under", "link"].map(name => {
-                const path = document.createElementNS(ns, "path");
-                path.setAttribute("class", `pillar__trace-${name}`);
-                path.setAttribute("pathLength", "1");   // lets CSS draw it from 0 to 1 whatever the card's size
-                svg.append(path);
-                return path;
-            });
-            // Shapes follow the card's size (and the gap to the next card)
-            new ResizeObserver(() => {
-                const w = card.offsetWidth, h = card.offsetHeight, r = 24, e = 0.5, m = h / 2;
-                const gap = parseFloat(getComputedStyle(card.parentElement).columnGap) || 0;
-                paths[0].setAttribute("d", `M${e},${m} V${r} A${r - e},${r - e} 0 0 1 ${r},${e} H${w - r} A${r - e},${r - e} 0 0 1 ${w - e},${r} V${m}`);
-                paths[1].setAttribute("d", `M${e},${m} V${h - r} A${r - e},${r - e} 0 0 0 ${r},${h - e} H${w - r} A${r - e},${r - e} 0 0 0 ${w - e},${h - r} V${m}`);
-                paths[2].setAttribute("d", `M${w - e},${m} H${w + gap}`);
-            }).observe(card);
-            return svg;
-        };
-        const grid = el("div", { class: "pillars__grid" }, ...(c.items || []).map((item, i) => {
-            const card = el("article", { class: "pillar", style: { "--n": i } });
-            card.append(trace(card),
+        const grid = el("div", { class: "pillars__grid ocs__grid ocs__grid--card cols-3" }, ...(c.items || []).map((item, i) => {
+            return el("article", { class: "pillar ocs__grid-cell", style: stagger(i, 120) },
                 el("div", { class: "pillar__top" },
                     el("span", { class: "pillar__icon" }, icon(item.icon)),
                     el("span", { class: "pillar__number", "aria-hidden": "true" }, pad(i + 1))),
                 el("h3", { class: "pillar__title" }, item.title),
                 el("p", { class: "pillar__text" }, item.text));
-            // A soft light follows the pointer across the card
-            card.addEventListener("pointermove", e => {
-                const r = card.getBoundingClientRect();
-                card.style.setProperty("--x", `${e.clientX - r.left}px`);
-                card.style.setProperty("--y", `${e.clientY - r.top}px`);
-            });
-            return card;
         }));
-        const observer = new IntersectionObserver(([entry]) => {
-            if (!entry.isIntersecting) return;
-            grid.classList.add("is-playing");
-            observer.disconnect();
-        }, { threshold: 0.6 });
-        observer.observe(grid);
         return el("div", { class: "container pillars" },
             el("header", { class: "section-head section-head--center reveal" },
                 el("h2", { class: "section-head__heading" },
@@ -246,8 +210,8 @@ const LAYOUTS = {
         return el("div", { class: "container audiences" },
             el("header", { class: "section-head reveal" },
                 el("h2", { class: "section-head__heading" }, ...lines(c.heading))),
-            el("div", { class: "audiences__grid" }, ...(c.items || []).map((item, i) =>
-                el("a", { class: "audience reveal", style: stagger(i + 1, 150), href: siteURL(item.url) },
+            el("div", { class: "audiences__grid ocs__grid ocs__grid--card cols-3" }, ...(c.items || []).map((item, i) =>
+                el("a", { class: "audience ocs__grid-cell reveal", style: stagger(i + 1, 150), href: siteURL(item.url) },
                     el("span", { class: "audience__icon" }, icon(item.icon)),
                     el("h3", { class: "audience__title" }, item.title),
                     el("p", { class: "audience__text" }, item.text),
@@ -256,8 +220,8 @@ const LAYOUTS = {
 
     // Guided course-style cards inspired by the CS Pathway; each step links to existing XRCare content.
     pathway(c) {
-        const steps = el("ol", { class: "pathway__steps", "aria-label": c.heading || "Learning path" },
-            ...(c.steps || []).map((step, i) => el("li", { class: `pathway-card${i === 0 ? " is-start" : ""}`,
+        const steps = el("ol", { class: "pathway__steps ocs__grid ocs__grid--card cols-4", "aria-label": c.heading || "Learning path" },
+            ...(c.steps || []).map((step, i) => el("li", { class: `pathway-card ocs__grid-cell${i === 0 ? " ocs__grid-cell--accent" : ""}`,
                 style: stagger(i, 110) },
                 el("a", { class: "pathway-card__link", href: siteURL(step.url) },
                     el("span", { class: "pathway-card__top" },
@@ -267,7 +231,7 @@ const LAYOUTS = {
                     el("span", { class: "pathway-card__title" }, step.title),
                     el("span", { class: "pathway-card__text" }, step.text),
                     el("span", { class: "pathway-card__action" }, step.action || "Explore", icon("fa-solid fa-arrow-right"))))));
-        return el("div", { class: "container pathway" },
+        return el("div", { class: "container pathway ocs__container" },
             el("header", { class: "section-head reveal" },
                 c.eyebrow ? el("p", { class: "pathway__eyebrow" }, c.eyebrow) : null,
                 el("h2", { class: "section-head__heading" }, c.heading),
@@ -304,8 +268,8 @@ const LAYOUTS = {
                     el("h2", { class: "audience-block__heading reveal" }, c.heading),
                     el("p", { class: "audience-block__text reveal", style: stagger(1) }, c.text),
                     c.cta ? el("div", { class: "reveal", style: stagger(2) }, action(c.cta, true)) : null)),
-            c.features?.length ? el("div", { class: "audience-block__features" }, ...c.features.map((f, i) =>
-                el("div", { class: "mini-card reveal", style: stagger(i + 1, 120) },
+            c.features?.length ? el("div", { class: "audience-block__features ocs__grid ocs__grid--card cols-3" }, ...c.features.map((f, i) =>
+                el("div", { class: "mini-card ocs__grid-cell reveal", style: stagger(i + 1, 120) },
                     el("span", { class: "mini-card__icon" }, icon(f.icon)),
                     el("h3", { class: "mini-card__title" }, f.title),
                     el("p", { class: "mini-card__text" }, f.text)))) : null);
