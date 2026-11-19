@@ -2,13 +2,13 @@
 
 - label: Product
   url: /
-- label: How It Works
-  url: /#nurse-copilot
+- label: Learning Path
+  url: /pathway/
+- label: XRCare Features
+  url: /#features
 - label: Solutions
   url: /explore/
 - label: About Us
   url: /about-us/
-- label: Explore
-  url: /explore/
 - label: Contact
   url: /contact/

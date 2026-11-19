@@ -12,6 +12,9 @@ sections:
     slogan: Smart glasses with Spatial AI for real-world nursing care.
     highlight: spatial AI
     links:
+    - label: Start the Learning Path
+      url: /pathway/
+      icon: fa-solid fa-route
     - label: How It Works
       url: /#nurse-copilot
       icon: fa-solid fa-glasses
