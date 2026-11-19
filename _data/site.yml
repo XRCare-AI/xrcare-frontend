@@ -70,7 +70,7 @@ hub:
   retake_survey: Retake the survey
   close: Close
   take_survey: Take the 1-minute survey
-  explore_heading: Jump back in
+  explore_heading: Your XRCare journey
   for_you: For you
   account_heading: Account
   edit: Edit
@@ -83,6 +83,11 @@ hub:
   email_label: Email
   role_label: Account type
   tiles:
+  - key: journey
+    icon: fa-solid fa-route
+    label: Learning Path
+    text: A guided tour of the co-pilot, care settings, features, and resources.
+    url: /pathway/
   - key: clinical
     icon: fa-solid fa-user-doctor
     label: Clinical Teams

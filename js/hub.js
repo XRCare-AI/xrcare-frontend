@@ -119,7 +119,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     drawRows(false);
 
     // Links into the site, stacked; the one matching the user's purpose comes first and is marked "For you"
-    const tiles = [...(hub.tiles || [])].sort((a, b) => (b.key === answers.purpose) - (a.key === answers.purpose));
+    const tiles = [...(hub.tiles || [])].sort((a, b) =>
+        Number(b.key === "journey") - Number(a.key === "journey") ||
+        Number(b.key === answers.purpose) - Number(a.key === answers.purpose));
     document.querySelector("[data-hub-tiles]").append(...tiles.map(tile => {
         const mine = tile.key === answers.purpose;
         return el("a", { class: `hub-link${mine ? " is-mine" : ""}`, href: siteURL(tile.url) },
