@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const purposeQuestion = survey.questions.find(q => q.id === "purpose");
     const purpose = purposeQuestion?.options.find(o => o.id === answers.purpose);
     if (user.needs_survey) {
-        actions.append(el("a", { class: "pill-button", href: siteURL("/welcome/") }, hub.take_survey, icon("fa-solid fa-arrow-right")));
+        actions.append(el("a", { class: "ocs__btn accent fill", href: siteURL("/welcome/") }, hub.take_survey, icon("fa-solid fa-arrow-right")));
     } else {
         if (purpose?.recommend) {
             actions.append(el("div", { class: "hub-recommend" },
@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 el("a", { class: "hub-recommend__link", href: siteURL(purpose.recommend.url) },
                     purpose.icon ? icon(purpose.icon) : null, el("span", {}, purpose.recommend.label), icon("fa-solid fa-arrow-right"))));
         }
-        const open = el("button", { type: "button", class: "pill-button pill-button--ghost hub__answers-button" },
+        const open = el("button", { type: "button", class: "ocs__btn pill hub__answers-button" },
             icon("fa-solid fa-sliders"), hub.answers_button);
         actions.append(open);
 
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         Number(b.key === answers.purpose) - Number(a.key === answers.purpose));
     document.querySelector("[data-hub-tiles]").append(...tiles.map(tile => {
         const mine = tile.key === answers.purpose;
-        return el("a", { class: `hub-link${mine ? " is-mine" : ""}`, href: siteURL(tile.url) },
+        return el("a", { class: `hub-link ocs__grid-cell${mine ? " ocs__grid-cell--accent is-mine" : ""}`, href: siteURL(tile.url) },
             el("span", { class: "hub-link__icon" }, icon(tile.icon)),
             el("span", { class: "hub-link__text" },
                 el("span", { class: "hub-link__label" }, tile.label, mine ? el("span", { class: "hub-link__badge" }, hub.for_you) : null),

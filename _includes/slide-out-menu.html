@@ -8,12 +8,12 @@
   </nav>
   <div class="slide-out__account">
     <div data-when="guest">
-      <a class="pill-button" href="{{ '/signup/' | relative_url }}" data-site-text="account.sign_up"></a>
+      <a class="ocs__btn accent fill" href="{{ '/signup/' | relative_url }}" data-site-text="account.sign_up"></a>
       <a class="slide-out__login" href="{{ '/login/' | relative_url }}" data-site-text="account.log_in"></a>
     </div>
     <div data-when="user" hidden>
       <p class="slide-out__who"><strong data-account="name"></strong></p>
-      <a class="pill-button" href="{{ '/account/' | relative_url }}" data-site-text="account.my_hub"></a>
+      <a class="ocs__btn accent fill" href="{{ '/account/' | relative_url }}" data-site-text="account.my_hub"></a>
       <button class="slide-out__login" type="button" data-action="log-out" data-site-text="account.log_out"></button>
     </div>
   </div>

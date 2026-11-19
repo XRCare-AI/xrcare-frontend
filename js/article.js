@@ -49,7 +49,7 @@ async function loadArticle() {
     } catch (error) {
         const missing = error.status === 404;
         setTitle(missing ? 'Article not found' : 'Unable to load article', 'XRCare AI');
-        const retry = el('button', { type: 'button', class: 'pill-button pill-button--small' }, 'Try again');
+        const retry = el('button', { type: 'button', class: 'ocs__btn accent fill small' }, 'Try again');
         retry.addEventListener('click', loadArticle);
         feedback.replaceChildren(el('div', { class: 'articles__state', role: 'alert' },
             el('h1', { class: 'article-hero__title' }, missing ? 'Article not found' : 'Unable to load this article'),

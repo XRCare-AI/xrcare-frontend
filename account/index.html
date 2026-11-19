@@ -17,7 +17,7 @@ scripts:
         <h1 class="hub__greeting" data-hub-greeting></h1>
         <p class="hub__since" data-hub-since></p>
       </div>
-      <button type="button" class="pill-button pill-button--ghost pill-button--small hub__logout" data-action="log-out">
+      <button type="button" class="ocs__btn pill small hub__logout" data-action="log-out">
         <i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i><span data-site-text="account.log_out"></span>
       </button>
     </header>
@@ -26,26 +26,26 @@ scripts:
 
     <div class="hub__grid">
       <!-- Account details, editable in place (PUT /api/user) -->
-      <section class="hub-box" aria-labelledby="hub-account-heading">
+      <section class="hub-box ocs__card" aria-labelledby="hub-account-heading">
         <div class="hub__section-head">
           <h2 id="hub-account-heading" class="hub-card__title" data-site-text="hub.account_heading">Account</h2>
-          <button type="button" class="hub__edit" data-hub-edit><i class="fa-solid fa-pen" aria-hidden="true"></i><span data-site-text="hub.edit">Edit</span></button>
+          <button type="button" class="ocs__btn pill hub__edit" data-hub-edit><i class="fa-solid fa-pen" aria-hidden="true"></i><span data-site-text="hub.edit">Edit</span></button>
         </div>
         <form class="hub-rows" data-hub-account novalidate>
           <div data-hub-fields></div>
           <div class="hub-rows__actions" hidden>
-            <button type="submit" class="pill-button pill-button--small" data-site-text="hub.save">Save changes</button>
-            <button type="button" class="hub__cancel" data-hub-cancel data-site-text="hub.cancel">Cancel</button>
+            <button type="submit" class="ocs__btn accent fill small" data-site-text="hub.save">Save changes</button>
+            <button type="button" class="ocs__btn pill hub__cancel" data-hub-cancel data-site-text="hub.cancel">Cancel</button>
           </div>
           <p class="hub-rows__message" role="status" aria-live="polite"></p>
         </form>
       </section>
 
-      <section class="hub-box" aria-labelledby="hub-explore-heading">
+      <section class="hub-box ocs__card" aria-labelledby="hub-explore-heading">
         <div class="hub__section-head">
           <h2 id="hub-explore-heading" class="hub-card__title" data-site-text="hub.explore_heading">Jump back in</h2>
         </div>
-        <div class="hub-links" data-hub-tiles></div>
+        <div class="hub-links ocs__grid ocs__grid--card cols-2" data-hub-tiles></div>
       </section>
     </div>
   </div>
@@ -56,7 +56,7 @@ scripts:
       <h2 id="hub-dialog-heading" data-site-text="hub.answers_heading"></h2>
       <button type="button" class="hub-dialog__close" data-hub-close><i class="fa-solid fa-xmark" aria-hidden="true"></i><span class="sr-only" data-site-text="hub.close"></span></button>
     </div>
-    <div class="hub-dialog__body" data-hub-answers></div>
-    <a class="pill-button" href="{{ '/welcome/' | relative_url }}"><span data-site-text="hub.retake_survey"></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    <div class="hub-dialog__body ocs__card" data-hub-answers></div>
+    <a class="ocs__btn accent fill" href="{{ '/welcome/' | relative_url }}"><span data-site-text="hub.retake_survey"></span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
   </dialog>
 </div>

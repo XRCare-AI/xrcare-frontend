@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             el("div", { class: "survey-intro__steps", "aria-hidden": "true" },
                 ...questions.map((q, i) => el("span", { style: { "--i": i } }))),
             el("div", { class: "survey__actions" },
-                button(s.start_label, () => question(0, 1), "pill-button", "fa-solid fa-arrow-right"),
+                button(s.start_label, () => question(0, 1), "ocs__btn accent fill", "fa-solid fa-arrow-right"),
                 skipLink())));
     }
 
@@ -84,12 +84,12 @@ document.addEventListener("DOMContentLoaded", async () => {
         };
         setProgress(index / questions.length);
 
-        const next = button(index === questions.length - 1 ? s.finish_label : s.next_label, () => advance(), "pill-button", "fa-solid fa-arrow-right");
+        const next = button(index === questions.length - 1 ? s.finish_label : s.next_label, () => advance(), "ocs__btn accent fill", "fa-solid fa-arrow-right");
         const back = button(s.back_label, () => (index ? question(index - 1, -1) : intro()), "survey__back", "fa-solid fa-arrow-left");
         back.prepend(back.lastChild);   // arrow before the label
 
         const cards = q.options.map((option, i) => {
-            const card = el("button", { type: "button", class: "survey-option", role: multiple ? "checkbox" : "radio",
+            const card = el("button", { type: "button", class: "survey-option ocs__grid-cell", role: multiple ? "checkbox" : "radio",
                 "data-id": option.id, style: { "--i": i } },
                 el("span", { class: "survey-option__key", "aria-hidden": "true" }, letters[i]),
                 option.icon ? el("i", { class: `survey-option__icon ${option.icon}`, "aria-hidden": "true" }) : null,
@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             el("h2", { class: "survey__heading", id: `q-${q.id}` }, q.title),
             el("p", { class: "survey__lead" },
                 multiple ? fill(s.choose_up_to, { max }) : q.text || "", counter ? " " : null, counter),
-            el("div", { class: `survey-options${q.options.length > 6 ? " survey-options--dense" : ""}`,
+            el("div", { class: `survey-options ocs__grid ocs__grid--standard cols-2${q.options.length > 6 ? " survey-options--dense" : ""}`,
                 role: multiple ? "group" : "radiogroup", "aria-labelledby": `q-${q.id}` }, ...cards),
             el("p", { class: "survey__hint" }, s.key_hint),
             el("div", { class: "survey__actions survey__actions--split" }, back, el("div", { class: "survey__actions-end" }, skipLink(), next))),
@@ -165,7 +165,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const updated = await apiRequest("/api/user/survey", "PUT", { answers });
             done(updated);
         } catch (error) {
-            const retry = button(s.finish_label, finish, "pill-button", "fa-solid fa-rotate-right");
+            const retry = button(s.finish_label, finish, "ocs__btn accent fill", "fa-solid fa-rotate-right");
             show(el("div", { class: "survey-question" },
                 el("h2", { class: "survey__heading" }, error.message),
                 el("div", { class: "survey__actions" },
