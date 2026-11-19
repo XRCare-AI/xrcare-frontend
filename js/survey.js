@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         setProgress(index / questions.length);
 
         const next = button(index === questions.length - 1 ? s.finish_label : s.next_label, () => advance(), "ocs__btn accent fill", "fa-solid fa-arrow-right");
-        const back = button(s.back_label, () => (index ? question(index - 1, -1) : intro()), "survey__back", "fa-solid fa-arrow-left");
+        const back = button(s.back_label, () => (index ? question(index - 1, -1) : intro()), "ocs__btn pill survey__back", "fa-solid fa-arrow-left");
         back.prepend(back.lastChild);   // arrow before the label
 
         const cards = q.options.map((option, i) => {

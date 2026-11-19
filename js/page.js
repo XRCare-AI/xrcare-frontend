@@ -306,9 +306,9 @@ const LAYOUTS = {
         return el("div", { class: "container team-grid" }, ...(c.groups || []).map(group =>
             el("div", { class: "team-grid__group" },
                 el("h2", { class: "section-head__heading reveal" }, group.heading),
-                el("div", { class: "team-grid__members" }, ...group.members.map((m, i) => {
+                el("div", { class: "team-grid__members ocs__grid ocs__grid--card cols-3" }, ...group.members.map((m, i) => {
                     const bio = el("div", { class: "member-card__bio", hidden: "" }, ...(m.bio || []).map(html => el("p", { html })));
-                    const toggle = el("button", { type: "button", class: "member-card__toggle", "aria-expanded": "false" },
+                    const toggle = el("button", { type: "button", class: "ocs__btn pill small member-card__toggle", "aria-expanded": "false" },
                         el("span", {}, c.read_bio || "Read bio"), icon("fa-solid fa-chevron-down"));
                     toggle.addEventListener("click", () => {
                         const open = bio.hidden;
@@ -316,7 +316,7 @@ const LAYOUTS = {
                         toggle.setAttribute("aria-expanded", String(open));
                         toggle.querySelector("span").textContent = open ? (c.hide_bio || "Hide bio") : (c.read_bio || "Read bio");
                     });
-                    return el("article", { class: "member-card reveal", style: stagger(i, 100) },
+                    return el("article", { class: "member-card ocs__grid-cell reveal", style: stagger(i, 100) },
                         el("div", { class: "member-card__head" },
                             el("img", { class: "member-card__image", src: assetURL(m.image), alt: "", loading: "lazy" }),
                             el("div", {},
