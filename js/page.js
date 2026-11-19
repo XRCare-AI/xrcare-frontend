@@ -254,6 +254,27 @@ const LAYOUTS = {
                     el("span", { class: "audience__link" }, c.link_label || "Explore", icon("fa-solid fa-arrow-right"))))));
     },
 
+    // Guided course-style cards inspired by the CS Pathway; each step links to existing XRCare content.
+    pathway(c) {
+        const steps = el("ol", { class: "pathway__steps", "aria-label": c.heading || "Learning path" },
+            ...(c.steps || []).map((step, i) => el("li", { class: `pathway-card${i === 0 ? " is-start" : ""}`,
+                style: stagger(i, 110) },
+                el("a", { class: "pathway-card__link", href: siteURL(step.url) },
+                    el("span", { class: "pathway-card__top" },
+                        el("span", { class: "pathway-card__number" }, step.number || pad(i + 1)),
+                        el("span", { class: "pathway-card__label" }, step.label || "Next step")),
+                    el("span", { class: "pathway-card__icon", "aria-hidden": "true" }, icon(step.icon)),
+                    el("span", { class: "pathway-card__title" }, step.title),
+                    el("span", { class: "pathway-card__text" }, step.text),
+                    el("span", { class: "pathway-card__action" }, step.action || "Explore", icon("fa-solid fa-arrow-right"))))));
+        return el("div", { class: "container pathway" },
+            el("header", { class: "section-head reveal" },
+                c.eyebrow ? el("p", { class: "pathway__eyebrow" }, c.eyebrow) : null,
+                el("h2", { class: "section-head__heading" }, c.heading),
+                c.text ? el("p", { class: "section-head__text" }, c.text) : null),
+            el("div", { class: "reveal", style: stagger(1) }, steps));
+    },
+
     cta(c) {
         return el("div", { class: "container" },
             el("div", { class: "cta reveal" },
