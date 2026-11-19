@@ -1,0 +1,169 @@
+@use "../abstracts/tokens" as *;
+@use "../abstracts/mixins" as *;
+
+// Course-style discovery path, kept separate from XRCare's clinical feature descriptions.
+.page-section--pathway {
+  padding: 70px 0 115px;
+
+  @include below($bp-phone) { padding: 52px 0 80px; }
+}
+
+.pathway {
+  &__eyebrow {
+    margin: 0 0 12px;
+    color: $accent;
+    font-family: $font-label;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  &__steps {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 26px;
+      left: 8%;
+      right: 8%;
+      height: 1px;
+      background: linear-gradient(90deg, rgba($accent, 0.7), rgba($violet, 0.25));
+      pointer-events: none;
+    }
+
+    @include below(1120px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @include below($bp-phone) {
+      grid-template-columns: 1fr;
+      gap: 12px;
+
+      &::before { top: 28px; bottom: 28px; left: 25px; right: auto; width: 1px; height: auto; }
+    }
+  }
+}
+
+.pathway-card {
+  position: relative;
+  min-width: 0;
+  border: 1px solid $line;
+  border-radius: $radius;
+  background: linear-gradient(160deg, rgba($white, 0.055), rgba($white, 0.018));
+  transition: border-color 0.2s ease, background-color 0.2s ease, translate 0.25s $ease-quint;
+
+  &.is-start {
+    border-color: rgba($accent, 0.42);
+    background: linear-gradient(160deg, rgba($accent, 0.11), rgba($white, 0.025) 68%);
+  }
+
+  &:hover,
+  &:focus-within {
+    border-color: rgba($accent, 0.6);
+    translate: 0 -3px;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 290px;
+    padding: 20px;
+    color: $white;
+
+    &:hover { color: $white; }
+    &:focus-visible { outline-offset: -4px; border-radius: $radius; }
+
+    @include below($bp-phone) {
+      min-height: 0;
+      padding: 17px 18px 17px 62px;
+    }
+  }
+
+  &__top {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+
+  &__number {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba($accent, 0.42);
+    border-radius: 50%;
+    background: $ink-raised;
+    color: $accent;
+    font-family: $font-display;
+    font-size: 15px;
+    font-weight: 700;
+  }
+
+  &__label {
+    color: $muted;
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  &__icon {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    margin-bottom: 14px;
+    border-radius: 13px;
+    background: rgba($violet, 0.13);
+    color: $accent;
+    font-size: 17px;
+
+    @include below($bp-phone) {
+      position: absolute;
+      top: 71px;
+      left: 18px;
+      width: 32px;
+      height: 32px;
+      font-size: 14px;
+    }
+  }
+
+  &__title {
+    display: block;
+    margin: 0 0 8px;
+    font-family: $font-display;
+    font-size: 19px;
+    font-weight: 600;
+    line-height: 1.25;
+  }
+
+  &__text {
+    display: block;
+    margin-bottom: 18px;
+    color: $muted;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  &__action {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    margin-top: auto;
+    color: $accent;
+    font-size: 14px;
+    font-weight: 600;
+
+    i { transition: transform 0.2s ease; }
+  }
+
+  &:hover &__action i,
+  &:focus-within &__action i { transform: translateX(4px); }
+}
