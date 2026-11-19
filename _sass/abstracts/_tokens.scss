@@ -1,23 +1,23 @@
-// Design tokens copied from xrcare.ai (Salient theme settings and the site's custom CSS)
+// XRCare brand tokens on the Open Coding Society preference-aware UI palette.
 
 // Colors
-$accent: #17ddfc;            // Salient accent color: headings, buttons, hotspots, slide-out menu
-$hero-heading: #00ccff;      // Home page h1
-$navy: #27395d;              // Eyebrow headings, menu text, active dot, submit text
-$navy-deep: #0e1e3b;         // Dark section backgrounds
-$header-bg: #080e20;         // Header color when not transparent
-$page-bg: #232323;           // Behind the full-screen rows
-$loading-bg: #1e2025;
-$yellow: #fffb00;            // Extra color 1: links on hover, inactive dots
-$footer-heading: #54c8e8;
+$accent: #3b82f6;            // OCS preference accent
+$hero-heading: $accent;
+$navy: #1e293b;
+$navy-deep: #0b1220;
+$header-bg: #0b1220;
+$page-bg: #0b1220;
+$loading-bg: #0b1220;
+$yellow: #facc15;
+$footer-heading: #e6eef8;
 $tooltip-bg: #2551a1;        // Hotspot tooltips
 $white: #ffffff;
 $black: #000000;
 $error: #d63637;             // WPForms error/required color
 
 // Fonts
-$font-body: "Montserrat", sans-serif;
-$font-label: "Fira Sans", sans-serif;
+$font-body: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+$font-label: Inter, system-ui, sans-serif;
 $font-tooltip: arial, helvetica, sans-serif;
 
 // Header
@@ -40,13 +40,13 @@ $ease-quint: cubic-bezier(0.23, 1, 0.32, 1);   // easeOutQuint (data-cae)
 $ease-menu: cubic-bezier(0.25, 1, 0.2, 1);
 
 // Redesign (2026): top menu bar, home page, log in / sign up / survey
-$font-display: "Space Grotesk", "Montserrat", sans-serif;
-$ink: #050a18;               // Page background behind the new home page and auth screens
-$ink-raised: #0c1430;        // Cards on $ink
-$violet: #7b61ff;            // Second gradient stop with $accent
-$line: rgba(255, 255, 255, 0.1);
-$muted: rgba(255, 255, 255, 0.66);
-$gradient: linear-gradient(120deg, $accent 0%, #4fa3ff 45%, $violet 100%);
-$header-height: 76px;
-$header-height-mobile: 64px;
-$radius: 18px;
+$font-display: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+$ink: #0b1220;
+$ink-raised: #0b1220;
+$violet: #3b82f6;
+$line: rgba(230, 238, 248, 0.08);
+$muted: #a0a0a0;
+$gradient: linear-gradient(90deg, $accent 0%, $accent 100%);
+$header-height: 64px;
+$header-height-mobile: 56px;
+$radius: 8px;
