@@ -438,8 +438,9 @@ p { line-height: 1.55; }
 .hub-dialog { border-radius: 8px; background: var(--panel); color: var(--pref-text-color); box-shadow: 0 12px 32px var(--navbar-shadow); }
 .hub-dialog__close { border-radius: 6px; }
 
-.auth { min-height: 100vh; background: var(--pref-bg-color); }
-.auth__panel { background: var(--panel); border-color: var(--ui-border); }
+.auth { min-height: calc(100vh - 64px); background: var(--pref-bg-color); }
+.auth__panel { padding-top: 32px; padding-bottom: 32px; background: var(--panel); border-color: var(--ui-border); }
+.auth__main { padding: 24px; }
 .auth__network,
 .auth__glow { display: none; }
 .auth__panel-heading,
@@ -448,7 +449,7 @@ p { line-height: 1.55; }
 .auth__card { padding: 24px; }
 .auth__switch a { background: none; -webkit-text-fill-color: var(--pref-accent-color); color: var(--pref-accent-color); }
 
-.survey { background: var(--pref-bg-color); }
+.survey { min-height: calc(100vh - 64px); padding: 32px 24px; background: var(--pref-bg-color); }
 .survey__backdrop,
 .survey__glow { display: none; }
 .survey__stage { max-width: 900px; }
@@ -517,6 +518,10 @@ input:focus, select:focus, textarea:focus { border-color: var(--pref-accent-colo
   .spotlight { padding-top: 24px; }
   .spotlight__copy { padding: 18px; }
   .spotlight__links { grid-template-columns: 1fr; }
+  .auth { min-height: calc(100vh - 56px); }
+  .auth__panel,
+  .auth__main { padding: 20px 16px; }
+  .survey { min-height: calc(100vh - 56px); padding: 20px 16px; }
   .auth__card,
   .survey-intro,
   .survey-question,
